@@ -1,3 +1,5 @@
+# Reto 2
+
 # /*
 #  * Reto #2
 #  * LA SUCESIÓN DE FIBONACCI
@@ -17,17 +19,38 @@
 #  *
 #  */
 
-# fun main() {
+#%% Fibonacci
+    # tiempo -> 3 ops por iteración, N pasos -> O(3*N) -> O(N)
+    # espacio -> 2 datos por iteración -> O(1)
+def fibonacci(n):
+    # La sucesión tiene sentido si n > 2
+    if n > 2:
+        fib_prev_prev = 0
+        fib_prev = 1
+        fib = 0
+        for i in range(0,n+1):
+            if i == 0:
+                print(i, ":", fib_prev_prev)
+            elif i == 1:
+                print(i, ":", fib_prev)
+            else:
+                fib = fib_prev_prev + fib_prev
+                print(i, ":", fib)
+                fib_prev_prev = fib_prev
+                fib_prev = fib
+    else:
+        return None
 
-#     var n0: Long = 0
-#     var n1: Long = 1
-
-#     (1..50).forEach { _ ->
-
-#         println(n0)
-
-#         val fib = n0 + n1
-#         n0 = n1
-#         n1 = fib
-#     }
-# }
+def main():
+    fibonacci(50)
+main()
+#%% Alternativa mas compacta
+def fib():
+   n0, n1 = 0, 1
+   N = 50
+   for i in range(N+1):
+       print(i, n0)
+       n = n0 + n1
+       n0, n1 = n1, n
+fib()
+# %%
