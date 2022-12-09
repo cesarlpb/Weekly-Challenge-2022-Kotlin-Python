@@ -7,7 +7,10 @@
 #  *
 #  * Enunciado: Crea UNA ÚNICA FUNCIÓN (importante que sólo sea una) que sea capaz de calcular y retornar el área de un polígono.
 #  * - La función recibirá por parámetro sólo UN polígono a la vez.
-#  * - Los polígonos soportados serán Triángulo (base * altura / 2), Cuadrado (lado ** 2) y Rectángulo (base * altura).
+#  * - Los polígonos soportados serán:
+#       - Triángulo (base * altura / 2), 
+#       - Cuadrado (lado ** 2) y 
+#       - Rectángulo (base * altura).
 #  * - Imprime el cálculo del área de un polígono de cada tipo.
 #  *
 #  * Información adicional:
@@ -17,54 +20,23 @@
 #  * - Subiré una posible solución al ejercicio el lunes siguiente al de su publicación.
 #  *
 #  */
+#%% Polígonos
+class Triangle:
+    def __init__(self, _base, _height):
+        self.base = _base
+        self.height = _height
+    def calc_area(self):
+        return round(self.base * self.height / 2, 2)
+    def __str__(self):
+        return f"Base: {self.base} u, Altura: {self.height} u. Área: {self.calc_area()} u^2"
 
-# fun main() {
+class Square:
+    pass
+class Rectangle:
+    pass
 
-#     area(Triangle(10.0, 5.0))
-#     area(Rectangle(5.0, 7.0))
-#     area(Square(4.0))
-# }
-
-# interface Polygon {
-
-#     fun area(): Double
-#     fun printArea()
-# }
-
-# data class Triangle(val base: Double, val height: Double): Polygon {
-
-#     override fun area(): Double {
-#         return (base * height) / 2
-#     }
-
-#     override fun printArea() {
-#         println("El área del triángulo es ${area()}")
-#     }
-# }
-
-# data class Rectangle(val length: Double, val width: Double): Polygon {
-
-#     override fun area(): Double {
-#         return length * width
-#     }
-
-#     override fun printArea() {
-#         println("El área del rectángulo es ${area()}")
-#     }
-# }
-
-# data class Square(val side: Double): Polygon {
-
-#     override fun area(): Double {
-#         return side * side
-#     }
-
-#     override fun printArea() {
-#         println("El área del cuadrado es ${area()}")
-#     }
-# }
-
-# private fun area(polygon: Polygon): Double {
-#     polygon.printArea()
-#     return polygon.area()
-# }
+def main():
+    triangle = Triangle(3,4)    # 6
+    # square = Square(3)          # 9
+    # rectangle = Rectangle(3,4)  # 12
+main()
