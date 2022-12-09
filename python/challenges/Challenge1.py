@@ -19,7 +19,10 @@
 #  *
 #  */
 
-#%%
+#%% Anagrama
+    # Complejidad
+    # tiempo -> O(1)
+    # espacio -> O(1)
 def isAnagram(word_1, word_2):
     if word_1.lower() == word_2.lower():
         return False
