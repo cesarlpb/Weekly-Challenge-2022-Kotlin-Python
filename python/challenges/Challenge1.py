@@ -1,3 +1,4 @@
+# Challenge 1
 # /*
 #  * Reto #1
 #  * ¿ES UN ANAGRAMA?
@@ -18,13 +19,14 @@
 #  *
 #  */
 
-# fun main() {
-#     println(isAnagram("amor", "roma"))
-# }
+#%%
+def isAnagram(word_1, word_2):
+    if word_1.lower() == word_2.lower():
+        return False
+    return sorted(word_1) == sorted(word_2)
 
-# private fun isAnagram(wordOne: String, wordTwo: String): Boolean {
-#     if (wordOne.lowercase() == wordTwo.lowercase()) {
-#         return false
-#     }
-#     return wordOne.lowercase().toCharArray().sortedArray().contentEquals(wordTwo.lowercase().toCharArray().sortedArray())
-# }
+def main():
+    print("'falso' y 'Falso':", isAnagram("falso", "Falso"))    # False
+    print("'amor' y 'roma':", isAnagram("amor", "roma"))    # True
+    print("'asdf' y 'qwerty':",isAnagram("asdf", "qwerty")) # False
+main()
