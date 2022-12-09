@@ -1,3 +1,4 @@
+# Reto 4
 # /*
 #  * Reto #4
 #  * ÁREA DE UN POLÍGONO
@@ -20,23 +21,53 @@
 #  * - Subiré una posible solución al ejercicio el lunes siguiente al de su publicación.
 #  *
 #  */
-#%% Polígonos
+#%% Polígonos - Triángulo, Cuadrado, Rectángulo
+    # tiempo y espacio -> O(1)
 class Triangle:
     def __init__(self, _base, _height):
+        self.name = "Triángulo".center(20)
         self.base = _base
         self.height = _height
     def calc_area(self):
         return round(self.base * self.height / 2, 2)
     def __str__(self):
-        return f"Base: {self.base} u, Altura: {self.height} u. Área: {self.calc_area()} u^2"
+        return f"Polígono:{self.name}\nBase: {self.base} u, Altura: {self.height} u. Área: {self.calc_area()} u^2"
 
 class Square:
-    pass
+    def __init__(self, _side):
+        self.name = "Cuadrado".center(20)
+        self.side = _side
+    def calc_area(self):
+        return round(self.side ** 2, 2)
+    def __str__(self):
+        return f"Polígono:{self.name}\nLado: {self.side} u. Área: {self.calc_area()} u^2"
+
 class Rectangle:
-    pass
+    def __init__(self, _base, _height):
+        self.name = "Rectángulo".center(20)
+        self.base = _base
+        self.height = _height
+    def calc_area(self):
+        return round(self.base * self.height, 2)
+    def __str__(self):
+        return f"Polígono:{self.name}\nBase: {self.base} u, Altura: {self.height} u. Área: {self.calc_area()} u^2"
 
 def main():
     triangle = Triangle(3,4)    # 6
-    # square = Square(3)          # 9
-    # rectangle = Rectangle(3,4)  # 12
+    square = Square(3)          # 9
+    rectangle = Rectangle(3,4)  # 12
+    print(triangle)
+    print(square)
+    print(rectangle)
 main()
+# Futuros cambios
+    # Crear una clase Polygon y derivar las clases Triangle, Square, Rectangle de ésta
+    # Hacer override del método de cálculo del área
+    # Extender a cualquier tipo de polígono regular
+        # https://es.wikihow.com/calcular-el-%C3%A1rea-de-un-pol%C3%ADgono
+        # A = 1/2 * perimetro * apotema
+            # Triángulo -> "perimetro" es base // apotema es altura
+            # Cuadrado como 4 triángulos -> 1/2 * 4 * lado * 1/2 * lado = lado * lado
+            # Rectángulo no es "regular", son dos lados distintos
+        # Perímetro = la suma de las longitudes de todos los lados
+        # Apotema = un segmento que une el centro del polígono con el punto medio de cualquier lado perpendicular a dicho lado
