@@ -1,3 +1,5 @@
+# Challenge 0
+
 # /*
 #  * Reto #0
 #  * EL FAMOSO "FIZZ BUZZ"
@@ -17,24 +19,20 @@
 #  *
 #  */
 
-# Solución en Python
+#%% Solución en Python
+    # Complejidad
+    # Como tenemos que comprobar todos los números -> Tiempo: O(n) // lineal
+    # Como no tenemos que guardar mas que dos booleans por cada iteración -> Espacio: O(1) // constante
 def main():
-    pass
-
-# Solución en Kotlin
-# fun main() {
-
-#     for (index in 1..100) {
-#         val divisibleByThree = index % 3 == 0
-#         val divisibleByFive = index % 5 == 0
-#         if (divisibleByThree && divisibleByFive) {
-#             println("fizzbuzz")
-#         } else if (divisibleByThree) {
-#             println("fizz")
-#         } else if (divisibleByFive) {
-#             println("buzz")
-#         } else {
-#             println(index)
-#         }
-#     }
-# }
+    for num in range(1,101):
+        is_multiple_of_three = num % 3 == 0
+        is_multiple_of_five = num % 5 == 0
+        if is_multiple_of_three and is_multiple_of_five:
+            print("fizzbuzz")
+        elif is_multiple_of_five:
+            print("buzz")
+        elif is_multiple_of_three:
+            print("fizz")
+        else:
+            print(num)
+main()
