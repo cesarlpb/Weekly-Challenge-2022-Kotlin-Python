@@ -63,3 +63,21 @@ python3 -m pip list
 ```
 pip install Fraction
 ```
+
+Para escribir en `requirements.txt` los paquetes instalados en el `venv` usamos:
+```
+pip freeze > requirements.txt
+```
+Para instalar todos los paquetes de nnuevo:
+```
+pip install -r "ruta_a_requirements.txt"
+```
+
+## .gitignore
+Hemos configurado el `.gitignore` para que si permita hacer seguimiento de `requirements.txt`:
+```
+    # created by virtualenv automatically
+    *
+    !.gitignore
+    !requirements.txt
+```

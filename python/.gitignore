@@ -1,5 +1,6 @@
 # Virtual environments
-/Challenge5
+/Challenge5/*
+!/Challenge5/.gitignore
 
 ######################
 # Source: https://github.com/github/gitignore/blob/main/Python.gitignore

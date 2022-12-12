@@ -1,0 +1,10 @@
+certifi==2022.12.7
+charset-normalizer==2.1.1
+configparser==5.3.0
+Fraction==2.2.0
+idna==3.4
+Pillow==9.3.0
+PyMySQL==1.0.2
+requests==2.28.1
+shutils==0.1.0
+urllib3==1.26.13
