@@ -21,6 +21,18 @@
 #  *
 #  */
 
+#%% Verificamos si los str tienen (), [], {} bien cerrados
+def main():
+    print(es_str_equilibrado("{a + b [c] * (2x2)}}}}"))
+    print(es_str_equilibrado("{ [ a * ( c + d ) ] - 5 }"))
+    print(es_str_equilibrado("{ a * ( c + d ) ] - 5 }"))
+    print(es_str_equilibrado("{a^4 + (((ax4)}"))
+    print(es_str_equilibrado("{ ] a * ( c + d ) + ( 2 - 3 )[ - 5 }"))
+    print(es_str_equilibrado("{{{{{{(}}}}}}"))
+    print(es_str_equilibrado("(a"))
+def es_str_equilibrado(string):
+    return True
+main()
 # fun main() {
 #     println(isBalanced("{a + b [c] * (2x2)}}}}"))
 #     println(isBalanced("{ [ a * ( c + d ) ] - 5 }"))
