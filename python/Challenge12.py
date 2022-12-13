@@ -19,19 +19,23 @@
 #  * - Subiré una posible solución al ejercicio el lunes siguiente al de su publicación.
 #  *
 #  */
+#%% Determinar si un texto es palíndromo
+def main():
+    print(es_palindromo("Ana lleva al oso la avellana."))       # True
+    print(es_palindromo("Adivina ya te opina, ya ni miles origina, ya ni cetro me domina, ya ni monarcas, a repaso ni mulato carreta, acaso nicotina, ya ni cita vecino, anima cocina, pedazo gallina, cedazo terso nos retoza de canilla goza, de pánico camina, ónice vaticina, ya ni tocino saca, a terracota luminosa pera, sacra nómina y ánimo de mortecina, ya ni giros elimina, ya ni poeta, ya ni vida")) # True
+    print(es_palindromo("¿Qué os ha parecido el reto?"))        # False
+def es_palindromo(string):
+    from unidecode import unidecode
 
-# fun main() {
-#     println(isPalindrome("Ana lleva al oso la avellana."))
-#     println(isPalindrome("Adivina ya te opina, ya ni miles origina, ya ni cetro me domina, ya ni monarcas, a repaso ni mulato carreta, acaso nicotina, ya ni cita vecino, anima cocina, pedazo gallina, cedazo terso nos retoza de canilla goza, de pánico camina, ónice vaticina, ya ni tocino saca, a terracota luminosa pera, sacra nómina y ánimo de mortecina, ya ni giros elimina, ya ni poeta, ya ni vida"))
-#     println(isPalindrome("¿Qué os ha parecido el reto?"))
-# }
-
-# private fun isPalindrome(text: String): Boolean {
-
-#     val normalizedText = Normalizer.normalize(text.lowercase(), Normalizer.Form.NFD)
-#         .replace("[^\\p{ASCII}]".toRegex(), "")
-#         .replace("[^a-z0-9]".toRegex(), "")
-#         return normalizedText == normalizedText.reversed()
-#     }
-
-
+    str_sin_signos = ""
+    for char in string.replace(" ", ""):
+        if char.isalnum():
+            str_sin_signos += char.lower()
+    # Aplicamos unidecode para quitar acentos y chars fuera del alfabeto inglés
+    str_sin_signos = unidecode(str_sin_signos)    
+    n = len(str_sin_signos)
+    for idx, char in enumerate(str_sin_signos):
+        if not char == str_sin_signos[n-idx-1]:
+            return False
+    return True
+main()
