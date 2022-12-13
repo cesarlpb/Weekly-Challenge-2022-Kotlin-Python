@@ -19,28 +19,21 @@
 #   - Subiré una posible solución al ejercicio el lunes siguiente al de su publicación.
 #  
 # 
-
-# fun main() {
-#     countWords("Hola, mi nombre es brais. Mi nombre completo es Brais Moure (MoureDev).")
-# }
-
-# fun countWords(text: String) {
-
-#     val words = mutableMapOf<String, Int>()
-
-#     text.lowercase().replace("[^a-z0-9]".toRegex(), " ").split(" ").forEach { key ->
-#         if (key.isEmpty()) {
-#             return@forEach
-#         }
-#         if (words[key] != null) {
-#             words[key] = words.getValue(key) + 1
-#         } else {
-#             words[key] = 1
-#         }
-#     }
-
-#     words.forEach { word ->
-#         println("${word.key} se ha repetido ${word.value} ${if(word.value == 1) "vez" else "veces"}")
-#     }
-# }
-
+#%% 
+def main():
+    print(contar_palabras("Hola, mundo. Estoy programando en Python, mundo 123."))
+    print(contar_palabras("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."))
+def contar_palabras(string):
+    string_sin_signos = ""
+    my_dict = {}
+    for char in string:
+        if char.isalnum() or char == " ":
+            string_sin_signos += char
+    lista = string_sin_signos.split(" ")
+    for palabra in lista:
+        if my_dict.get(palabra) == None:
+            my_dict[palabra] = 1
+        else:
+            my_dict[palabra] += 1
+    return my_dict
+main()
