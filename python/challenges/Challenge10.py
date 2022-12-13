@@ -23,13 +23,13 @@
 
 #%% Verificamos si los str tienen (), [], {} bien cerrados
 def main():
-    # print(es_str_equilibrado("{a + b [c] * (2x2)}}}}"))                 # False
-    # print(es_str_equilibrado("{ [ a * ( c + d ) ] - 5 }"))              # True
-    # print(es_str_equilibrado("{ a * ( c + d ) ] - 5 }"))                # False
-    # print(es_str_equilibrado("{a^4 + (((ax4)}"))                        # False
+    print(es_str_equilibrado("{a + b [c] * (2x2)}}}}"))                 # False
+    print(es_str_equilibrado("{ [ a * ( c + d ) ] - 5 }"))              # True
+    print(es_str_equilibrado("{ a * ( c + d ) ] - 5 }"))                # False
+    print(es_str_equilibrado("{a^4 + (((ax4)}"))                        # False
     print(es_str_equilibrado("{ ] a * ( c + d ) + ( 2 - 3 )[ - 5 }"))   # False - pos
-    # print(es_str_equilibrado("{{{{{{(}}}}}}"))                          # False
-    # print(es_str_equilibrado("(a"))                                     # False
+    print(es_str_equilibrado("{{{{{{(}}}}}}"))                          # False
+    print(es_str_equilibrado("(a"))                                     # False
 def es_str_equilibrado(string):
     chars_validos = "{}()[]"
     cuenta_chars = {}
@@ -57,38 +57,15 @@ def es_str_equilibrado(string):
     for idx in range(len(input_str)):
         caracter = input_str[idx]
         posiciones_char[caracter].append(idx)
-    # TODO: Queda terminar la verificacion de si las posiciones son correctas
-    print(posiciones_char)
+    idx = 0
+    
+    while idx < len(chars_validos):
+        pos_apertura = posiciones_char[chars_validos[idx]]
+        pos_cierre = posiciones_char[chars_validos[idx+1]]
+        for izq, der in zip(pos_apertura, pos_cierre):
+            if not izq < der:
+                return False
+        idx += 2
+    
     return True
 main()
-# fun main() {
-#     println(isBalanced("{a + b [c] * (2x2)}}}}"))
-#     println(isBalanced("{ [ a * ( c + d ) ] - 5 }"))
-#     println(isBalanced("{ a * ( c + d ) ] - 5 }"))
-#     println(isBalanced("{a^4 + (((ax4)}"))
-#     println(isBalanced("{ ] a * ( c + d ) + ( 2 - 3 )[ - 5 }"))
-#     println(isBalanced("{{{{{{(}}}}}}"))
-#     println(isBalanced("(a"))
-# }
-
-# private fun isBalanced(expression: String): Boolean {
-
-#     val symbols = mapOf("{" to "}", "[" to "]", "(" to ")")
-#     val stack = arrayListOf<String>()
-
-#     expression.forEach {
-
-#         val symbol = it.toString()
-#         val containsKey = symbols.containsKey(symbol)
-
-#         if (containsKey || symbols.containsValue(symbol)) {
-#             if (containsKey) {
-#                 stack.add(symbol)
-#             } else if (stack.isEmpty() || symbol != symbols[stack.removeLast()]) {
-#                 return false
-#             }
-#         }
-#     }
-
-#     return stack.isEmpty()
-# }
