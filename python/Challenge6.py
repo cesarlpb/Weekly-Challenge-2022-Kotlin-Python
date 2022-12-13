@@ -18,6 +18,24 @@
 #  *
 #  */
 
+#%% Invertir str
+    # for, enumerate, range
+    # list comprehension
+    # list // op de list
+def main():
+    print("Hola mundo"[::-1])
+    print(invertir_string("Hola mundo"))
+def invertir_string(string):
+    str_invertido = ""
+    n = len(string)
+    idx = n-1
+    while idx >= 0:
+        str_invertido += string[idx]
+        idx -= 1
+    return str_invertido
+
+main()
+
 # fun main() {
 #     println(reverse("Hola mundo"))
 #     println(recursiveReverse("Hola mundo"))
@@ -44,3 +62,5 @@
 #     return newReversedText
 # }
 
+
+# %%
