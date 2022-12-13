@@ -18,7 +18,22 @@
 #  * - Subiré una posible solución al ejercicio el lunes siguiente al de su publicación.
 #  *
 #  */
-
+#%% Eliminamos chars
+def main():
+    print(eliminar_chars("brais","moure"))
+    print(eliminar_chars("Me gusta Java","Me gusta Kotlin"))
+    print(eliminar_chars("Me gusta Python","Me gusta Javascript"))
+    print(eliminar_chars("Usa el canal de nuestro discord (https://mouredev.com/discord) \"\uD83D\uDD01reto-semanal\" para preguntas, dudas o prestar ayuda a la comunidad","Puedes hacer un Fork del repo y una Pull Request al repo original para que veamos tu solución aportada."))
+def eliminar_chars(str1, str2):
+    out1, out2 = "", ""
+    for char1, char2 in zip(str1, str2):
+        if char1 not in str2:
+            out1 += char1
+        if char2 not in str1:
+            out2 += char2
+    return (out1, out2)
+main()
+#         "Puedes hacer un Fork del repo y una Pull Request al repo original para que veamos tu solución aportada."
 # fun main() {
 #     printNonCommon("brais","moure")
 #     printNonCommon("Me gusta Java","Me gusta Kotlin")
