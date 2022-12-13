@@ -22,8 +22,9 @@
 
 #%% Texto a Morse
 def main():
-    texto_a_morse("Hola, mundo")
-    morse_a_texto(texto_a_morse("Hola, mundo"))
+    print(texto_a_morse("Hola, mundo!"))
+    texto = morse_a_texto(texto_a_morse("Hola, mundo!"))
+    print("texto:", texto)
 alfanum_morse = {
 "A": "· —",         "N": "— ·",         "0": "— — — — —",
 "B": "— · · ·",     "Ñ": "— — · — —",   "1": "· — — — —",
@@ -38,86 +39,34 @@ alfanum_morse = {
 "J":	"· — — —",	"W":	"· — —",	".":	"· — · — · —",
 "K":	"— · —",	"X":	"— · · —",	",":	"— — · · — —",
 "L":	"· — · ·",	"Y":	"— · — —",	"?":	"· · — — · ·",
-"M":	"— —",      "Z":	"— — · ·",	"\"":	"· — · · — ·",	 "/":	"— · · — ·"
+"M":	"— —",      "Z":	"— — · ·",	"\"":	"· — · · — ·",	 
+"/":	"— · · — ·", "!": ". . . - - - . . . - - -",
+"error": "....--.....---..-...-.."
 }
 def texto_a_morse(string):
-    pass
+    # Usamos dict y chars separados por espacio y palabras por dos espacios
+    morse = ""
+    string = string.upper()
+    for char in string:
+        chars_en_morse = alfanum_morse.get(char)
+        if chars_en_morse != None:
+            morse += chars_en_morse.replace(" ","") + " "
+        elif char == " ":
+            morse += "  "
+    return morse
 def morse_a_texto(string):
-    pass
-#  fun main() {
-
-#      val naturalText = "Chocapic. Es una marca de cereales?"
-#      val morseText = decoder(naturalText)
-#      println(morseText)
-#      println(decoder(morseText))
-#  }
-
-#  private fun decoder(input: String): String {
-
-#      var decodedInput = ""
-
-#      val naturalDict = mapOf("A" to ".—", "N" to "—.", "0" to "—————",
-#          "B" to "—...", "Ñ" to "——.——", "1" to ".————",
-#          "C" to "—.—.", "O" to "———", "2" to "..———",
-#          "CH" to "————", "P" to ".——.", "3" to "...——",
-#          "D" to "—..", "Q" to "——.—", "4" to "....—",
-#          "E" to ".", "R" to ".—.", "5" to ".....",
-#          "F" to "..—.", "S" to "...", "6" to "—....",
-#          "G" to "——.", "T" to "—", "7" to "——...",
-#          "H" to "....", "U" to "..—", "8" to "———..",
-#          "I" to "..", "V" to "...—", "9" to "————.",
-#          "J" to ".———", "W" to ".——", "." to ".—.—.—",
-#          "K" to "—.—", "X" to "—..—", "," to "——..——",
-#          "L" to ".—..", "Y" to "—.——", "?" to "..——..",
-#          "M" to "——", "Z" to "——..", "\"" to ".—..—.", "/" to "—..—.")
-
-#      val morseDict = mutableMapOf<String, String>()
-#      naturalDict.forEach {
-#          morseDict[it.value] = it.key
-#      }
-
-#      if (input.contains("[a-zA-Z0-9]".toRegex())) {
-
-#           Natural
-
-#          var index = 0
-#          var ch = false
-
-#          input.uppercase().forEach { character ->
-#              if (!ch && character.toString() != " ") {
-#                  val nextIndex = index + 1
-#                  if (character.toString() == "C" && nextIndex < input.length && input.uppercase()[nextIndex].toString() == "H") {
-#                      decodedInput += naturalDict["CH"]
-#                      ch = true
-#                  } else {
-#                      decodedInput += naturalDict[character.toString()]
-#                  }
-
-#                  decodedInput += " "
-#              } else {
-#                  if (!ch) {
-#                      decodedInput += " "
-#                  }
-#                  ch = false
-#              }
-
-#              index++
-#          }
-
-#      } else if (input.contains(".") || input.contains("—")) {
-
-#           Morse
-
-#          input.split("  ").forEach { word ->
-#              word.split(" ").forEach { symbols ->
-#                  if (symbols.isNotEmpty()) {
-#                      decodedInput += morseDict[symbols]
-#                  }
-#              }
-#              decodedInput += " "
-#          }
-#      }
-
-#      return decodedInput
-#  }
-# %%
+    # string -> espacio entre chars y doble espacio entre palabras
+    values = [value.replace(" ", "") for value in list(alfanum_morse.values())]
+    keys = list(alfanum_morse.keys())
+    palabras = string.split("  ")
+    texto = ""
+    for palabra in palabras:
+        chars = palabra.split(" ")
+        for char in chars: 
+            if char in values:
+                idx = values.index(char)
+                letra = keys[idx]
+                texto += letra
+        texto += " "
+    return texto.capitalize()
+main()
