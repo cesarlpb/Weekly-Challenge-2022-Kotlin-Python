@@ -23,14 +23,42 @@
 
 #%% Verificamos si los str tienen (), [], {} bien cerrados
 def main():
-    print(es_str_equilibrado("{a + b [c] * (2x2)}}}}"))
-    print(es_str_equilibrado("{ [ a * ( c + d ) ] - 5 }"))
-    print(es_str_equilibrado("{ a * ( c + d ) ] - 5 }"))
-    print(es_str_equilibrado("{a^4 + (((ax4)}"))
-    print(es_str_equilibrado("{ ] a * ( c + d ) + ( 2 - 3 )[ - 5 }"))
-    print(es_str_equilibrado("{{{{{{(}}}}}}"))
-    print(es_str_equilibrado("(a"))
+    # print(es_str_equilibrado("{a + b [c] * (2x2)}}}}"))                 # False
+    # print(es_str_equilibrado("{ [ a * ( c + d ) ] - 5 }"))              # True
+    # print(es_str_equilibrado("{ a * ( c + d ) ] - 5 }"))                # False
+    # print(es_str_equilibrado("{a^4 + (((ax4)}"))                        # False
+    print(es_str_equilibrado("{ ] a * ( c + d ) + ( 2 - 3 )[ - 5 }"))   # False - pos
+    # print(es_str_equilibrado("{{{{{{(}}}}}}"))                          # False
+    # print(es_str_equilibrado("(a"))                                     # False
 def es_str_equilibrado(string):
+    chars_validos = "{}()[]"
+    cuenta_chars = {}
+    # Añadimos caracteres válidos al dict
+    for char_valido in chars_validos:
+        cuenta_chars[char_valido] = 0
+    
+    # Hacemos copia del dict y cambiamos values a []
+    posiciones_char = cuenta_chars.copy()
+    for key in posiciones_char.keys():
+        posiciones_char[key] = []
+
+    lista = [char if char in chars_validos else "" for char in string]
+    input_str = "".join(lista)
+    for char in input_str:
+        cuenta_chars[char] += 1
+    # Verificamos cuentas de (), {}, []
+    n = len(chars_validos) # debe ser par
+    for idx in range(int(n/2)):
+        cuenta_izq = cuenta_chars.get(chars_validos[idx])
+        cuenta_der = cuenta_chars.get(chars_validos[n-idx-1])
+        if cuenta_izq != cuenta_der:
+            return False
+    # Verificamos posiciones de (), {}, []
+    for idx in range(len(input_str)):
+        caracter = input_str[idx]
+        posiciones_char[caracter].append(idx)
+    # TODO: Queda terminar la verificacion de si las posiciones son correctas
+    print(posiciones_char)
     return True
 main()
 # fun main() {
