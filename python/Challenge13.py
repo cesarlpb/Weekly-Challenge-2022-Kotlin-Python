@@ -17,6 +17,26 @@
 #  *
 #  */
 
+#%% Factorial
+    # 5! = 5*4*3*2*1 = 120 = 5*4! = 5*4*3! ...
+    # 0! = 1
+    # 1! = 1
+    # 3! = 3*2*1 = 6
+def main():
+    print("0!", factorial(0))  # 1
+    print("7!", factorial(7))  # 5040
+    print("10!", factorial(10)) # 3628800
+    print("1!", factorial(1))  # 1    
+    print("-1!", factorial(-1)) # Error o mensaje
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    elif n > 0:
+        return n*factorial(n-1)
+    else: 
+        print("n debe ser no negativo")
+        return None
+main()
 # fun main() {
 #     println(factorial(0) ?:run { "No tiene factorial" })
 #     println(factorial(7) ?:run { "No tiene factorial" })
