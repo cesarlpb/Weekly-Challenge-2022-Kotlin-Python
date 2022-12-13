@@ -51,7 +51,7 @@ print("Altura:", height, "px")
 #%% 3. Calcular el aspect ratio como el cociente y simplificar a una "fracción simple" -> Fraction
 # https://stackoverflow.com/questions/23344185/how-to-convert-a-decimal-number-into-fraction
 from fractions import Fraction
-aspect_ratio = round(width / height, 10)
+aspect_ratio = round(width / height, 15)
 fraccion = Fraction(aspect_ratio).limit_denominator()
 print("Aspect ratio:", fraccion)
 # %%
