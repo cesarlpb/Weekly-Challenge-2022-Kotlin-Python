@@ -72,7 +72,11 @@ Para instalar todos los paquetes de nnuevo:
 ```
 pip install -r "ruta_a_requirements.txt"
 ```
+## Unidecode
 
+```
+pip install Unidecode
+```
 ## .gitignore
 Hemos configurado el `.gitignore` para que si permita hacer seguimiento de `requirements.txt`:
 ```
