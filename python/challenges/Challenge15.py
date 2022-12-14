@@ -1,5 +1,5 @@
 # Challenge 15
-
+import math
 # /*
 #  * Reto #15
 #  * ¿CUÁNTOS DÍAS?
@@ -24,17 +24,20 @@
 #%% Cálculo de diferencia de fechas
 def main():
     # Sin datetime
+    print(calc_dias("18/05/2022", "29/05/2023"))    # 376 días
     print(calc_dias("18/05/2022", "29/05/2022"))    # 11 días
-    print(calc_dias("mouredev", "29/04/2022"))      # Error
+    # print(calc_dias("mouredev", "29/04/2022"))    # Error
     print(calc_dias("18/5/2022", "29/04/2022"))     # 19 días
     # Con datetime
     str_d1 = '20/10/2021'
     str_d2 = '20/2/2022'
-    print(str_d2, "-", str_d1, ":", calc_dias_datetime(str_d1, str_d2))
+    # print(str_d2, "-", str_d1, ":", calc_dias_datetime(str_d1, str_d2))
     # Test
-    print(calc_dias_datetime("18/05/2022", "29/05/2022"))
+    print(calc_dias_datetime("18/05/2022", "29/05/2023"))
+    # print(calc_dias_datetime("18/05/2022", "29/05/2022"))
     # print(calc_dias_datetime("asdf", "29/04/2022"))
-    print(calc_dias_datetime("18/5/2022", "29/04/2022"))
+    # print(calc_dias_datetime("18/5/2022", "29/04/2022"))
+
 def calc_dias_datetime(date1, date2):
     from datetime import datetime
     # Convertimos strings en obj datetime
@@ -44,7 +47,48 @@ def calc_dias_datetime(date1, date2):
     delta = d2 - d1
     return f'Han pasado {delta.days} días'
 def calc_dias(date1, date2):
-    pass
+    # dd/mm/yyyy
+    lista1 = date1.split("/")
+    lista2 = date2.split("/")
+    # (día, mes, año)
+    fecha1 = tuple([int(dato) for dato in lista1])
+    fecha2 = tuple([int(dato) for dato in lista2])
+    # Dentro del mismo año, debemos considerar los días de cada mes
+    dias_en_cada_mes = {
+        1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 
+        6: 30, 7: 31, 8: 31, 9: 30, 10: 31,
+        11: 30, 12: 31 
+    }
+    # Creamos variables para los días, meses y años
+    day1, month1, year1 = fecha1
+    day2, month2, year2 = fecha2
+    diferencia_años = abs(year2 - year1)
+    diferencia_meses = abs(month2 - month1)
+   
+    # índices del 0 al 11 para los meses !
+    dias_mes = list(dias_en_cada_mes.values())
+
+    if diferencia_años == 0:
+    # si el año es bisiesto, Feb tiene 29 días
+    # Año bisiesto := Año bisiesto es el divisible entre 4, salvo que sea año secular -último de cada siglo, terminado en «00»-, en cuyo caso también ha de ser divisible entre 400.
+        # "dia_absoluto" := del 1 al 365 o 366
+        dia1_absoluto, dia2_absoluto = 0, 0
+        if diferencia_meses == 0:
+            return abs(day2-day1)
+        else:
+            mes = 1
+            while mes < month1 or mes < month2:
+                if mes < month1:
+                    dia1_absoluto += dias_mes[mes-1]
+                if mes < month2:
+                    dia2_absoluto += dias_mes[mes-1]
+                mes += 1
+            dia1_absoluto += day1
+            dia2_absoluto += day2
+            return abs(dia2_absoluto - dia1_absoluto)
+    else:
+    # Entre años, debemos considerar también los bisiestos
+        pass
 main()
 
 # fun main() {
