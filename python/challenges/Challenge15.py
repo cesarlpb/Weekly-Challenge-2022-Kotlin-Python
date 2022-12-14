@@ -39,36 +39,64 @@ def main():
     # print(calc_dia_absoluto(10, 1, 2022, dias_mes)) # 10
     # print(calc_dia_absoluto(1, 3, 2020, dias_mes))  # 61
     # Sin datetime
+    # ok
+    print("Días entre 14/2/2020 y 14/02/2023", calc_dias("14/2/2020", "14/02/2023"))    # 365*3 + 1 -> delta_1
+    print("Días entre 14/2/2019 y 14/02/2023", calc_dias("14/2/2019", "14/02/2023"))    # 365*4 + 1 -> delta_2
+    print("Días entre 14/2/2021 y 14/03/2024", calc_dias("14/2/2021", "14/03/2024"))    # 365*3 + 29 -> delta_2
 
-    print(calc_dias("14/2/2020", "14/02/2023"))    # 365*3 + 1 -> delta_1
-    # print(calc_dias("14/2/2019", "14/02/2023"))    # 365*4 + 1 -> delta_2
-    # print(calc_dias("14/2/2021", "14/03/2024"))    # 365*3 + 1 -> delta_2
-
-    # print(calc_dias("14/12/2022", "10/01/2023"))    # 27 días
-    # print(calc_dias("14/12/2022", "10/02/2023"))    # 58 días
-    # print(calc_dias("14/12/2022", "10/03/2023"))    # 58+30 días
-    # print(calc_dias("18/05/2022", "29/05/2023"))    # 376 días
-    # print(calc_dias("18/05/2022", "29/05/2022"))    # 11 días
-    # print(calc_dias("mouredev", "29/04/2022"))    # Error
-    # print(calc_dias("18/5/2022", "29/04/2022"))     # 19 días
+    # Test - grupo 2 - ok
+    print(calc_dias("14/12/2022", "10/01/2023"))    # 27 días
+    print(calc_dias("14/12/2022", "10/02/2023"))    # 58 días
+    print(calc_dias("14/12/2022", "10/03/2023"))    # 58+28 = 86 días
+    print(calc_dias("18/05/2022", "29/05/2023"))    # 376 días
+    print(calc_dias("18/05/2022", "29/05/2022"))    # 11 días
+    print(calc_dias("18/5/2022", "29/04/2022"))     # 19 días
+    # print(calc_dias("hola, mundo", "29/04/2022"))   # Error
+    
     # Con datetime
     str_d1 = '20/10/2021'
     str_d2 = '20/2/2022'
     # print(str_d2, "-", str_d1, ":", calc_dias_datetime(str_d1, str_d2))
     # Test
-    # print(calc_dias_datetime("18/05/2022", "29/05/2023"))
-    # print(calc_dias_datetime("18/05/2022", "29/05/2022"))
-    # print(calc_dias_datetime("asdf", "29/04/2022"))
-    # print(calc_dias_datetime("18/5/2022", "29/04/2022"))
+    print(calc_dias_datetime("18/05/2022", "29/05/2023"))
+    print(calc_dias_datetime("18/05/2022", "29/05/2022"))
+    print(calc_dias_datetime("18/5/2022", "29/04/2022"))
+    print(calc_dias_datetime("asdf", "29/04/2022"))         # Error
+
+def str_es_int(string):
+    try: 
+        if isinstance(int(string), int):
+            return True
+    except ValueError:
+        return False
+
+def encontrar_datos_erroneos(str1, str2):
+        lista1 = str1.split("/")
+        lista2 = str2.split("/")
+        datos_erroneos = []
+        if sum([str_es_int(digito) for digito in lista1]) < 3:
+            datos_erroneos.append(str1)
+        if sum([str_es_int(digito) for digito in lista2]) < 3:
+            datos_erroneos.append(str2)
+        return datos_erroneos
 
 def calc_dias_datetime(date1, date2):
     from datetime import datetime
     # Convertimos strings en obj datetime
-    d1 = datetime.strptime(date1, "%d/%m/%Y")
-    d2 = datetime.strptime(date2, "%d/%m/%Y")
-    # Calculamos diferencia de fechas en timedelta
-    delta = d2 - d1
-    return f'Han pasado {delta.days} días'
+        # Añadimos bloque try / except
+    try:
+        d1 = datetime.strptime(date1, "%d/%m/%Y")
+        d2 = datetime.strptime(date2, "%d/%m/%Y")
+    except ValueError:
+        dato_erroneo = encontrar_datos_erroneos(date1, date2)
+        print(f"Error: El input {dato_erroneo} no tiene el formato de fecha correcto: dd/mm/aaaa")
+    else:
+        # Calculamos diferencia de fechas en timedelta
+        delta = d2 - d1
+        return f'Han pasado {delta.days} días'
+    finally: 
+        return "No se pudo calcular la diferencia de días"
+    
 def es_año_bisiesto(año):
     # si el año es bisiesto, Feb tiene 29 días
     # Año bisiesto := Año bisiesto es el divisible entre 4, salvo que sea año secular -último de cada siglo, 
@@ -99,112 +127,75 @@ def calc_dias(date1, date2):
     # dd/mm/yyyy
     lista1 = date1.split("/")
     lista2 = date2.split("/")
-    # (día, mes, año)
-    fecha1 = tuple([int(dato) for dato in lista1])
-    fecha2 = tuple([int(dato) for dato in lista2])
-    # Dentro del mismo año, debemos considerar los días de cada mes
-    dias_en_cada_mes = {
-        1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 
-        6: 30, 7: 31, 8: 31, 9: 30, 10: 31,
-        11: 30, 12: 31 
-    }
-    # Creamos variables para los días, meses y años
-    day1, month1, year1 = fecha1
-    day2, month2, year2 = fecha2
-    diferencia_años = abs(year2 - year1)
-    diferencia_meses = abs(month2 - month1)
-   
-    # índices del 0 al 11 para los meses !
-    dias_mes = list(dias_en_cada_mes.values())
-
-    if diferencia_años == 0:
+    datos_erroneos = encontrar_datos_erroneos(date1, date2)
+    if not datos_erroneos:
+        # (día, mes, año)
+        fecha1 = tuple([int(dato) for dato in lista1])
+        fecha2 = tuple([int(dato) for dato in lista2])
+        # Dentro del mismo año, debemos considerar los días de cada mes
+        dias_en_cada_mes = {
+            1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 
+            6: 30, 7: 31, 8: 31, 9: 30, 10: 31,
+            11: 30, 12: 31 
+        }
+        # Creamos variables para los días, meses y años
+        day1, month1, year1 = fecha1
+        day2, month2, year2 = fecha2
+        diferencia_años = abs(year2 - year1)
+        diferencia_meses = abs(month2 - month1)
     
-        dia1_absoluto, dia2_absoluto = 0, 0
-        if diferencia_meses == 0:
-            return abs(day2-day1)
-        else:
-            mes = 1
-            while mes < month1 or mes < month2:
-                if mes < month1:
-                    dia1_absoluto += dias_mes[mes-1]
-                if mes < month2:
-                    dia2_absoluto += dias_mes[mes-1]
-                mes += 1
-            dia1_absoluto += day1
-            dia2_absoluto += day2
-            return abs(dia2_absoluto - dia1_absoluto)
-    else:
-    # Entre años, debemos considerar también los bisiestos
-        # diferencia = sum(dias_mes)*(diferencia_años)
-        # 1. Determinar qué fecha es posterior -> inicio, fin
-        # 2. Empezando en inicio, sumamos días hasta fin
-        # 3. Tener en cuenta bisiestos
-        if year1 > year2:
-            dia_ini, mes_ini, año_ini = fecha2 
-            dia_fin, mes_fin, año_fin = fecha1
-        elif year2 > year1:
-            dia_ini, mes_ini, año_ini = fecha1 # ok
-            dia_fin, mes_fin, año_fin = fecha2 # ok
+        # índices del 0 al 11 para los meses !
+        dias_mes = list(dias_en_cada_mes.values())
 
-        # Replanteamos esta parte con días absolutos por cada año considerado en el bucle
+        if diferencia_años == 0:
         
-        # Este entra en juego cuando hay más de 1 año de por medio
-        delta_2 = 0
-        dias_bisiestos = 0
-        if diferencia_años > 1:
-            for año_for in range(año_ini+1, año_fin):
-                if es_año_bisiesto(año_for):
-                    dias_bisiestos += 1
-                delta_2 += 365
+            dia1_absoluto, dia2_absoluto = 0, 0
+            if diferencia_meses == 0:
+                return abs(day2-day1)
+            else:
+                mes = 1
+                while mes < month1 or mes < month2:
+                    if mes < month1:
+                        dia1_absoluto += dias_mes[mes-1]
+                    if mes < month2:
+                        dia2_absoluto += dias_mes[mes-1]
+                    mes += 1
+                dia1_absoluto += day1
+                dia2_absoluto += day2
+                return abs(dia2_absoluto - dia1_absoluto)
+        else:
+        # Entre años, debemos considerar también los bisiestos
+            # diferencia = sum(dias_mes)*(diferencia_años)
+            # 1. Determinar qué fecha es posterior -> inicio, fin
+            # 2. Empezando en inicio, sumamos días hasta fin
+            # 3. Tener en cuenta bisiestos
+            if year1 > year2:
+                dia_ini, mes_ini, año_ini = fecha2 
+                dia_fin, mes_fin, año_fin = fecha1
+            elif year2 > year1:
+                dia_ini, mes_ini, año_ini = fecha1 # ok
+                dia_fin, mes_fin, año_fin = fecha2 # ok
 
-        # Mínimo hay un cambio de mes
-        delta_1 = 0 
-        dias_totales_año_ini = 365
-        if es_año_bisiesto(año_ini):
-            dias_totales_año_ini += 1
-        delta_1 = dias_totales_año_ini - calc_dia_absoluto(dia_ini, mes_ini, año_ini, dias_mes) # 31-14 = 17
+            # Replanteamos esta parte con días absolutos por cada año considerado en el bucle
+            
+            # Este entra en juego cuando hay más de 1 año de por medio
+            delta_2 = 0
+            dias_bisiestos = 0
+            if diferencia_años > 1:
+                for año_for in range(año_ini+1, año_fin):
+                    if es_año_bisiesto(año_for):
+                        dias_bisiestos += 1
+                    delta_2 += 365
 
-        delta_3 = calc_dia_absoluto(dia_fin, mes_fin, año_fin, dias_mes) # 10
-        return delta_1 + delta_2 + delta_3 + dias_bisiestos
+            # Mínimo hay un cambio de mes
+            delta_1 = 0 
+            dias_totales_año_ini = 365
+            if es_año_bisiesto(año_ini):
+                dias_totales_año_ini += 1
+            delta_1 = dias_totales_año_ini - calc_dia_absoluto(dia_ini, mes_ini, año_ini, dias_mes) # 31-14 = 17
+
+            delta_3 = calc_dia_absoluto(dia_fin, mes_fin, año_fin, dias_mes) # 10
+            return delta_1 + delta_2 + delta_3 + dias_bisiestos
+    else:
+        raise Exception(f"Los inputs {datos_erroneos} no tienen formato de fecha correcto: dd/mm/aaaa")
 main()
-
-# fun main() {
-
-#     printDaysBetween("18/05/2022", "29/05/2022")
-#     printDaysBetween("mouredev", "29/04/2022")
-#     printDaysBetween("18/5/2022", "29/04/2022")
-# }
-
-# private fun printDaysBetween(firstDate: String, secondDate: String) {
-#     try {
-#         println(daysBetween(firstDate, secondDate))
-#     } catch (e: DaysBetweenError) {
-#         println("Error en el formato de alguna fecha")
-#     } catch (e: Exception) {
-#             println("Error en el parse de alguna fecha")
-#     }
-# }
-
-# class DaysBetweenError: Exception()
-
-# private fun daysBetween(firstDate: String, secondDate: String): Int {
-
-#     val formatter = SimpleDateFormat("dd/MM/yyyy")
-#     val firstParsedDate = formatter.parse(firstDate)
-#     val secondParsedDate = formatter.parse(secondDate)
-
-#     val regex = "^([0-9]){2}[/]([0-9]){2}[/]([0-9]){4}$".toRegex()
-
-#     if (firstParsedDate != null
-#         && secondParsedDate != null
-#         && firstDate.contains(regex)
-#         && secondDate.contains(regex)
-#     ) {
-
-#         return TimeUnit.DAYS.convert(
-#             firstParsedDate.time - secondParsedDate.time,
-#             TimeUnit.MILLISECONDS
-#         ).toInt().absoluteValue
-#     }
-#     throw DaysBetweenError()
-# }
