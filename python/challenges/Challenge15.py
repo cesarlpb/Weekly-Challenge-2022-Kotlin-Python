@@ -40,7 +40,7 @@ def main():
     # print(calc_dia_absoluto(1, 3, 2020, dias_mes))  # 61
     # Sin datetime
 
-    # print(calc_dias("14/2/2020", "14/02/2023"))    # 365*3 + 1 -> delta_1
+    print(calc_dias("14/2/2020", "14/02/2023"))    # 365*3 + 1 -> delta_1
     # print(calc_dias("14/2/2019", "14/02/2023"))    # 365*4 + 1 -> delta_2
     # print(calc_dias("14/2/2021", "14/03/2024"))    # 365*3 + 1 -> delta_2
 
@@ -148,14 +148,23 @@ def calc_dias(date1, date2):
 
         # Replanteamos esta parte con días absolutos por cada año considerado en el bucle
         
+        # Este entra en juego cuando hay más de 1 año de por medio
         delta_2 = 0
         dias_bisiestos = 0
+        if diferencia_años > 1:
+            for año_for in range(año_ini+1, año_fin):
+                if es_año_bisiesto(año_for):
+                    dias_bisiestos += 1
+                delta_2 += 365
 
         # Mínimo hay un cambio de mes
-            # * condición para sumar dia bisiesto si hay *
-        delta_1 = dias_mes[mes_ini-1] - dia_ini # 17
-        
-        delta_3 = dia_fin                       # 10
+        delta_1 = 0 
+        dias_totales_año_ini = 365
+        if es_año_bisiesto(año_ini):
+            dias_totales_año_ini += 1
+        delta_1 = dias_totales_año_ini - calc_dia_absoluto(dia_ini, mes_ini, año_ini, dias_mes) # 31-14 = 17
+
+        delta_3 = calc_dia_absoluto(dia_fin, mes_fin, año_fin, dias_mes) # 10
         return delta_1 + delta_2 + delta_3 + dias_bisiestos
 main()
 
