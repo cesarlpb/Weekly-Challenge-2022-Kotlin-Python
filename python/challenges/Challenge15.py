@@ -1,9 +1,4 @@
-# # # Challenge 15
-
-# import java.text.ParseException
-# import java.text.SimpleDateFormat
-# import java.util.concurrent.TimeUnit
-# import kotlin.math.absoluteValue
+# Challenge 15
 
 # /*
 #  * Reto #15
@@ -26,10 +21,28 @@
 #  *
 #  */
 
+#%% Cálculo de diferencia de fechas
 def main():
-    print(calc_dias("18/05/2022", "29/05/2022"))
-    print(calc_dias("mouredev", "29/04/2022"))
-    print(calc_dias("18/5/2022", "29/04/2022"))
+    # Sin datetime
+    print(calc_dias("18/05/2022", "29/05/2022"))    # 11 días
+    print(calc_dias("mouredev", "29/04/2022"))      # Error
+    print(calc_dias("18/5/2022", "29/04/2022"))     # 19 días
+    # Con datetime
+    str_d1 = '20/10/2021'
+    str_d2 = '20/2/2022'
+    print(str_d2, "-", str_d1, ":", calc_dias_datetime(str_d1, str_d2))
+    # Test
+    print(calc_dias_datetime("18/05/2022", "29/05/2022"))
+    # print(calc_dias_datetime("asdf", "29/04/2022"))
+    print(calc_dias_datetime("18/5/2022", "29/04/2022"))
+def calc_dias_datetime(date1, date2):
+    from datetime import datetime
+    # Convertimos strings en obj datetime
+    d1 = datetime.strptime(date1, "%d/%m/%Y")
+    d2 = datetime.strptime(date2, "%d/%m/%Y")
+    # Calculamos diferencia de fechas en timedelta
+    delta = d2 - d1
+    return f'Han pasado {delta.days} días'
 def calc_dias(date1, date2):
     pass
 main()
