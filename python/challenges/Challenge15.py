@@ -22,11 +22,31 @@ import math
 #  */
 
 #%% Cálculo de diferencia de fechas
-def main():
+def main():    
+
+    # Año bisiesto - ok
+    # print(es_año_bisiesto(2000)) # True
+    # print(es_año_bisiesto(2022)) # False
+    # print(es_año_bisiesto(2020)) # True
+
+    # calc_dia_absoluto() - ok
+    # dias_en_cada_mes = {
+    #     1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 
+    #     6: 30, 7: 31, 8: 31, 9: 30, 10: 31,
+    #     11: 30, 12: 31 
+    # }
+    # dias_mes = list(dias_en_cada_mes.values())
+    # print(calc_dia_absoluto(10, 1, 2022, dias_mes)) # 10
+    # print(calc_dia_absoluto(1, 3, 2020, dias_mes))  # 61
     # Sin datetime
-    print(calc_dias("14/12/2022", "10/01/2023"))    # 27 días
-    print(calc_dias("14/12/2022", "10/02/2023"))    # 58 días
-    print(calc_dias("14/12/2022", "10/03/2023"))    # 58+30 días
+
+    # print(calc_dias("14/2/2020", "14/02/2023"))    # 365*3 + 1 -> delta_1
+    # print(calc_dias("14/2/2019", "14/02/2023"))    # 365*4 + 1 -> delta_2
+    # print(calc_dias("14/2/2021", "14/03/2024"))    # 365*3 + 1 -> delta_2
+
+    # print(calc_dias("14/12/2022", "10/01/2023"))    # 27 días
+    # print(calc_dias("14/12/2022", "10/02/2023"))    # 58 días
+    # print(calc_dias("14/12/2022", "10/03/2023"))    # 58+30 días
     # print(calc_dias("18/05/2022", "29/05/2023"))    # 376 días
     # print(calc_dias("18/05/2022", "29/05/2022"))    # 11 días
     # print(calc_dias("mouredev", "29/04/2022"))    # Error
@@ -49,6 +69,32 @@ def calc_dias_datetime(date1, date2):
     # Calculamos diferencia de fechas en timedelta
     delta = d2 - d1
     return f'Han pasado {delta.days} días'
+def es_año_bisiesto(año):
+    # si el año es bisiesto, Feb tiene 29 días
+    # Año bisiesto := Año bisiesto es el divisible entre 4, salvo que sea año secular -último de cada siglo, 
+    # terminado en «00»-, en cuyo caso también ha de ser divisible entre 400.
+        # "dia_absoluto" := del 1 al 365 o 366
+    if not año % 4:
+        if año % 100:
+            return True
+        elif not año % 100 and not año % 400:
+            return True
+    return False
+
+def calc_dia_absoluto(dia, mes, año, dias_mes):
+    # 10, 1, 2022 -> no bis -> 10
+    # 1, 3, 2020 -> bisiesto -> 31 + 29 + 1 = 61
+    # 14, 12, yyyy -> suma hasta nov
+    dia_absoluto = 0
+    dia_bisiesto = 0
+    mes_while = 1
+    while mes_while < mes:        
+        dia_absoluto += dias_mes[mes_while-1]
+        if mes_while == 2 and es_año_bisiesto(año):
+            dia_bisiesto = 1
+        mes_while += 1
+    return dia_absoluto + dia_bisiesto + dia
+
 def calc_dias(date1, date2):
     # dd/mm/yyyy
     lista1 = date1.split("/")
@@ -72,9 +118,7 @@ def calc_dias(date1, date2):
     dias_mes = list(dias_en_cada_mes.values())
 
     if diferencia_años == 0:
-    # si el año es bisiesto, Feb tiene 29 días
-    # Año bisiesto := Año bisiesto es el divisible entre 4, salvo que sea año secular -último de cada siglo, terminado en «00»-, en cuyo caso también ha de ser divisible entre 400.
-        # "dia_absoluto" := del 1 al 365 o 366
+    
         dia1_absoluto, dia2_absoluto = 0, 0
         if diferencia_meses == 0:
             return abs(day2-day1)
@@ -102,39 +146,17 @@ def calc_dias(date1, date2):
             dia_ini, mes_ini, año_ini = fecha1 # ok
             dia_fin, mes_fin, año_fin = fecha2 # ok
 
-        # El mes 12 no puede ser 0
-        contador = (mes_ini + 1) % 12        
-        mes, año = contador, año_ini
-
-        if contador == 0:
-            contador = 12
-        if contador == 1:
-            año += 1
+        # Replanteamos esta parte con días absolutos por cada año considerado en el bucle
+        
         delta_2 = 0
-        iteracion = 0
-
-        mes_objetivo = 0
-        if mes_fin == 1:
-            mes_objetivo = 1
-
-        # TODO: replantear con días absolutos de cada año
-
-        while iteracion < 1 or (mes != mes_objetivo and año != año_fin):
-            iteracion += 1
-
-            delta_2 += dias_mes[mes-1]
-            
-            contador += 1
-            mes = contador % 12
-            if mes == 1:
-                año += 1
-            if mes == 0:
-                mes = 12
+        dias_bisiestos = 0
 
         # Mínimo hay un cambio de mes
+            # * condición para sumar dia bisiesto si hay *
         delta_1 = dias_mes[mes_ini-1] - dia_ini # 17
+        
         delta_3 = dia_fin                       # 10
-        return delta_1 + delta_2 + delta_3
+        return delta_1 + delta_2 + delta_3 + dias_bisiestos
 main()
 
 # fun main() {
