@@ -24,16 +24,19 @@ import math
 #%% Cálculo de diferencia de fechas
 def main():
     # Sin datetime
-    print(calc_dias("18/05/2022", "29/05/2023"))    # 376 días
-    print(calc_dias("18/05/2022", "29/05/2022"))    # 11 días
+    print(calc_dias("14/12/2022", "10/01/2023"))    # 27 días
+    print(calc_dias("14/12/2022", "10/02/2023"))    # 58 días
+    print(calc_dias("14/12/2022", "10/03/2023"))    # 58+30 días
+    # print(calc_dias("18/05/2022", "29/05/2023"))    # 376 días
+    # print(calc_dias("18/05/2022", "29/05/2022"))    # 11 días
     # print(calc_dias("mouredev", "29/04/2022"))    # Error
-    print(calc_dias("18/5/2022", "29/04/2022"))     # 19 días
+    # print(calc_dias("18/5/2022", "29/04/2022"))     # 19 días
     # Con datetime
     str_d1 = '20/10/2021'
     str_d2 = '20/2/2022'
     # print(str_d2, "-", str_d1, ":", calc_dias_datetime(str_d1, str_d2))
     # Test
-    print(calc_dias_datetime("18/05/2022", "29/05/2023"))
+    # print(calc_dias_datetime("18/05/2022", "29/05/2023"))
     # print(calc_dias_datetime("18/05/2022", "29/05/2022"))
     # print(calc_dias_datetime("asdf", "29/04/2022"))
     # print(calc_dias_datetime("18/5/2022", "29/04/2022"))
@@ -88,7 +91,50 @@ def calc_dias(date1, date2):
             return abs(dia2_absoluto - dia1_absoluto)
     else:
     # Entre años, debemos considerar también los bisiestos
-        pass
+        # diferencia = sum(dias_mes)*(diferencia_años)
+        # 1. Determinar qué fecha es posterior -> inicio, fin
+        # 2. Empezando en inicio, sumamos días hasta fin
+        # 3. Tener en cuenta bisiestos
+        if year1 > year2:
+            dia_ini, mes_ini, año_ini = fecha2 
+            dia_fin, mes_fin, año_fin = fecha1
+        elif year2 > year1:
+            dia_ini, mes_ini, año_ini = fecha1 # ok
+            dia_fin, mes_fin, año_fin = fecha2 # ok
+
+        # El mes 12 no puede ser 0
+        contador = (mes_ini + 1) % 12        
+        mes, año = contador, año_ini
+
+        if contador == 0:
+            contador = 12
+        if contador == 1:
+            año += 1
+        delta_2 = 0
+        iteracion = 0
+
+        mes_objetivo = 0
+        if mes_fin == 1:
+            mes_objetivo = 1
+
+        # TODO: replantear con días absolutos de cada año
+
+        while iteracion < 1 or (mes != mes_objetivo and año != año_fin):
+            iteracion += 1
+
+            delta_2 += dias_mes[mes-1]
+            
+            contador += 1
+            mes = contador % 12
+            if mes == 1:
+                año += 1
+            if mes == 0:
+                mes = 12
+
+        # Mínimo hay un cambio de mes
+        delta_1 = dias_mes[mes_ini-1] - dia_ini # 17
+        delta_3 = dia_fin                       # 10
+        return delta_1 + delta_2 + delta_3
 main()
 
 # fun main() {
