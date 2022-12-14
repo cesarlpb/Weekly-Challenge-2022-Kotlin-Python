@@ -26,6 +26,14 @@
 #  *
 #  */
 
+def main():
+    print(calc_dias("18/05/2022", "29/05/2022"))
+    print(calc_dias("mouredev", "29/04/2022"))
+    print(calc_dias("18/5/2022", "29/04/2022"))
+def calc_dias(date1, date2):
+    pass
+main()
+
 # fun main() {
 
 #     printDaysBetween("18/05/2022", "29/05/2022")
