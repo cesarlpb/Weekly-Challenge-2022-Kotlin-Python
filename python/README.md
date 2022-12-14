@@ -78,6 +78,12 @@ pip install -r "ruta_a_requirements.txt"
 pip install Unidecode
 ```
 - [Más información](https://pypi.org/project/Unidecode/)
+
+## Datetime
+```
+pip install datetime
+```
+[Ejemplo de uso](https://pynative.com/python-difference-between-two-dates/)
 ## .gitignore
 Hemos configurado el `.gitignore` para que si permita hacer seguimiento de `requirements.txt`:
 ```
