@@ -26,26 +26,23 @@
 #  * - Subiré una posible solución al ejercicio el lunes siguiente al de su publicación.
 #  *
 #  */
-
-# fun main() {
-#     println(isArmstrong(371))
-#     println(isArmstrong(-371))
-#     println(isArmstrong(372))
-#     println(isArmstrong(0))
-# }
-
-# private fun isArmstrong(number: Int): Boolean {
-
-#     return if (number < 0) {
-#         false
-#     } else {
-#         var sum = 0
-#         val powValue = number.toString().length
-
-#         number.toString().forEach { character ->
-#             sum += character.toString().toDouble().pow(powValue).toInt()
-#         }
-
-#         number == sum
-#     }
-# }
+#%% Números de Armstrong
+    # Ej: 153 = 1^3 + 5^3 + 3^3 True
+def main():
+    print(370, es_num_de_Armstrong(370))
+    print(371, es_num_de_Armstrong(371))
+    print(-371, es_num_de_Armstrong(-371))
+    print(372, es_num_de_Armstrong(372))
+    print(0, es_num_de_Armstrong(0))
+def es_num_de_Armstrong(num):
+    if num < 0:
+        return False
+    else:
+        num_str = str(num)
+        n = len(num_str)
+        digitos = [int(digit) for digit in num_str]
+        suma = 0
+        for digito in digitos:
+            suma += digito**n
+        return suma == num
+main()
