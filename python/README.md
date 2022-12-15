@@ -84,6 +84,13 @@ pip install Unidecode
 pip install datetime
 ```
 [Ejemplo de uso](https://pynative.com/python-difference-between-two-dates/)
+
+## Enums
+```
+pip install enum34
+```
+[Documentación oficial](https://pypi.org/project/enum/)
+
 ## .gitignore
 Hemos configurado el `.gitignore` para que si permita hacer seguimiento de `requirements.txt`:
 ```
