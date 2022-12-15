@@ -1,0 +1,4 @@
+Ha ocurrido este error: No se puede dividir entre 0
+Ha ocurrido este error: No se puede dividir entre 0
+Ha ocurrido este error: x e y deben ser números
+Ha ocurrido este error: x e y deben ser números
