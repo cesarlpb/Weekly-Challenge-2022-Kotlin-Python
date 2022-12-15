@@ -25,8 +25,8 @@ from enum import Enum
 
 #%% Tres en Raya
 # Lista de listas -> array 2D
-tablero = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
-print(tablero) # ejemplo
+# tablero = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+# print(tablero) # ejemplo
 class TresEnRaya(Enum):
     X = "X",
     O = "O",
@@ -73,12 +73,32 @@ def buscar_ganador_diagonal(tablero):
     pass
 def tres_en_raya(tablero):
     # Si el tablero no es válido
-    
+    contadores = [0, 0, 0]  # cont_x, cont_o, cont_empty
+    chars_validos = [TresEnRaya.X, TresEnRaya.O, TresEnRaya.EMPTY]
+    existe_char_no_valido = False
+    for fila in tablero:
+        for col in fila:
+            if col not in chars_validos:
+                existe_char_no_valido = True
+            elif col in chars_validos:
+                idx = chars_validos.index(col)
+                contadores[idx] += 1
+
+    # Proporción incorrecta de X y O
+    n = len(tablero) * len(tablero[0]) # 9
+    cont_x, cont_o, cont_empty = contadores
+    cont_x_o = n - cont_empty
+    es_proporcion_correcta = False
+    if cont_x_o % 2 == 0:
+        es_proporcion_correcta = cont_x_o // 2 == cont_x and cont_x_o // 2 == cont_o
+    else:
+        es_proporcion_correcta = abs(cont_x - cont_o) == 1
+    return (contadores, not existe_char_no_valido and es_proporcion_correcta)
+
     # Hay ganador
     # Hay empate -> no gana nadie
     # Si ganan ambos ?
-    
-    pass
+
 main()
 # fun main() {
 
