@@ -65,14 +65,7 @@ def main():
         [TresEnRaya.X, TresEnRaya.X, TresEnRaya.O],
         [TresEnRaya.X, TresEnRaya.X, TresEnRaya.X]
     ]))
-def buscar_ganador_horizontal(tablero):
-    pass
-def buscar_ganador_vertical(tablero):
-    pass
-def buscar_ganador_diagonal(tablero):
-    pass
-def tres_en_raya(tablero):
-    # Si el tablero no es válido
+def comprobar_si_hay_char_no_valido(tablero):
     contadores = [0, 0, 0]  # cont_x, cont_o, cont_empty
     chars_validos = [TresEnRaya.X, TresEnRaya.O, TresEnRaya.EMPTY]
     existe_char_no_valido = False
@@ -83,9 +76,11 @@ def tres_en_raya(tablero):
             elif col in chars_validos:
                 idx = chars_validos.index(col)
                 contadores[idx] += 1
+    return (existe_char_no_valido, contadores)
 
-    # Proporción incorrecta de X y O
+def comprobar_si_es_prop_correcta(tablero):
     n = len(tablero) * len(tablero[0]) # 9
+    my_bool, contadores = comprobar_si_hay_char_no_valido(tablero)
     cont_x, cont_o, cont_empty = contadores
     cont_x_o = n - cont_empty
     es_proporcion_correcta = False
@@ -93,6 +88,19 @@ def tres_en_raya(tablero):
         es_proporcion_correcta = cont_x_o // 2 == cont_x and cont_x_o // 2 == cont_o
     else:
         es_proporcion_correcta = abs(cont_x - cont_o) == 1
+    return es_proporcion_correcta
+
+def buscar_ganador_horizontal(tablero):
+    pass
+def buscar_ganador_vertical(tablero):
+    pass
+def buscar_ganador_diagonal(tablero):
+    pass
+def tres_en_raya(tablero):
+    # True el tablero no es válido - es decir, tiene chars != X, O, ""
+    (existe_char_no_valido, contadores) = comprobar_si_hay_char_no_valido(tablero)
+    # Proporción incorrecta de X y O
+    es_proporcion_correcta = comprobar_si_es_prop_correcta(tablero)
     return (contadores, not existe_char_no_valido and es_proporcion_correcta)
 
     # Hay ganador
