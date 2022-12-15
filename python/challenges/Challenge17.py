@@ -61,10 +61,15 @@ def verificar_carrera(acciones, carrera):
         if elemento not in (Acciones.JUMP.value[0], Acciones.RUN.value[0]):
             return False
     # Iteramos en acciones y carrera para comprobar si el atleta realiza las acciones correctas:
+    carrera_mod = ""
     for accion, elemento in zip(acciones, carrera):
         if accion.value[0] != elemento:
+            if accion == Acciones.RUN and elemento == "|":
+                pass
+            elif accion == Acciones.JUMP and elemento == "_":
+                pass
             return False
-    return len(acciones) == len(carrera)
+    return (carrera_mod, len(acciones) == len(carrera))
 
 main()
 # private fun checkRace(athlete: List<Acciones>, track: String) : Boolean {
