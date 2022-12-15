@@ -28,33 +28,46 @@ from enum import Enum
 #  *
 #  */
 
-# fun main() {
-#     println(checkRace(listOf(AthleteState.RUN, AthleteState.JUMP, AthleteState.RUN, AthleteState.JUMP, AthleteState.RUN), "_|_|_"))
-#     println(checkRace(listOf(AthleteState.RUN, AthleteState.RUN, AthleteState.RUN, AthleteState.JUMP, AthleteState.RUN), "_|_|_"))
-#     println(checkRace(listOf(AthleteState.RUN, AthleteState.RUN, AthleteState.JUMP, AthleteState.JUMP, AthleteState.RUN), "_|_|_"))
-#     println(checkRace(listOf(AthleteState.RUN, AthleteState.RUN, AthleteState.JUMP, AthleteState.JUMP, AthleteState.RUN), "_|_|_|_"))
-#     println(checkRace(listOf(AthleteState.RUN, AthleteState.JUMP, AthleteState.RUN, AthleteState.JUMP), "_|_|_"))
-#     println(checkRace(listOf(AthleteState.RUN, AthleteState.JUMP, AthleteState.RUN, AthleteState.JUMP, AthleteState.RUN, AthleteState.JUMP, AthleteState.RUN), "_|_|_"))
-#     println(checkRace(listOf(AthleteState.JUMP, AthleteState.JUMP, AthleteState.JUMP, AthleteState.JUMP, AthleteState.JUMP), "|||||"))
-#     println(checkRace(listOf(AthleteState.JUMP, AthleteState.JUMP, AthleteState.JUMP, AthleteState.JUMP, AthleteState.JUMP), "||?||"))
-# }
-
 #%% Carrera de obstáculos
-# pip install enum
+
 class Acciones(Enum):
-    RUN = 1,
-    JUMP = 2
+    RUN = "_",
+    JUMP = "|"
 
-print(Acciones.RUN)
-print(Acciones.RUN.name)
-print(Acciones.RUN.value)
+# Prints de ejemplo:
+# print(Acciones.RUN)
+# print(Acciones.RUN.name)
+# print(Acciones.RUN.value)
 
-# private enum class AthleteState(val segment: String) {
-#     RUN("_"),
-#     JUMP("|")
-# }
+# Comparación de _ con valor de RUN: 
 
-# private fun checkRace(athlete: List<AthleteState>, track: String) : Boolean {
+# print(Acciones.RUN.value[0], "_")     # _ _
+# print(Acciones.RUN.value[0] == "_")   # True
+# print(type(Acciones.RUN.value[0]), type("_")) # str
+def main():
+    print(verificar_carrera([Acciones.RUN, Acciones.JUMP, Acciones.RUN, Acciones.JUMP, Acciones.RUN], "_|_|_"))
+    print(verificar_carrera([Acciones.RUN, Acciones.RUN, Acciones.RUN, Acciones.JUMP, Acciones.RUN], "_|_|_"))
+    print(verificar_carrera([Acciones.RUN, Acciones.RUN, Acciones.JUMP, Acciones.JUMP, Acciones.RUN], "_|_|_"))
+    print(verificar_carrera([Acciones.RUN, Acciones.RUN, Acciones.JUMP, Acciones.JUMP, Acciones.RUN], "_|_|_|_"))
+    print(verificar_carrera([Acciones.RUN, Acciones.JUMP, Acciones.RUN, Acciones.JUMP], "_|_|_"))
+    print(verificar_carrera([Acciones.RUN, Acciones.JUMP, Acciones.RUN, Acciones.JUMP, Acciones.RUN, Acciones.JUMP, Acciones.RUN], "_|_|_"))
+    print(verificar_carrera([Acciones.JUMP, Acciones.JUMP, Acciones.JUMP, Acciones.JUMP, Acciones.JUMP], "|||||"))
+    print(verificar_carrera([Acciones.JUMP, Acciones.JUMP, Acciones.JUMP, Acciones.JUMP, Acciones.JUMP], "||?||"))
+
+
+def verificar_carrera(acciones, carrera):
+    # Verificamos que los chars de carrera sean "_" y "|"
+    for elemento in carrera:
+        if elemento not in (Acciones.JUMP.value[0], Acciones.RUN.value[0]):
+            return False
+    # Iteramos en acciones y carrera para comprobar si el atleta realiza las acciones correctas:
+    for accion, elemento in zip(acciones, carrera):
+        if accion.value[0] != elemento:
+            return False
+    return len(acciones) == len(carrera)
+
+main()
+# private fun checkRace(athlete: List<Acciones>, track: String) : Boolean {
 
 #     val totalActions = if (athlete.count() > track.count())  athlete.count() else track.count()
 #     val minActions = if (athlete.count() > track.count()) track.count() else athlete.count()
@@ -69,8 +82,8 @@ print(Acciones.RUN.value)
 #         } else {
 #             val segment = trackSegments[index]
 #             when(val state = athlete[index]) {
-#                 AthleteState.RUN -> if (segment.toString() == state.segment) state.segment else "/"
-#                 AthleteState.JUMP -> if (segment.toString() == state.segment) state.segment else "x"
+#                 Acciones.RUN -> if (segment.toString() == state.segment) state.segment else "/"
+#                 Acciones.JUMP -> if (segment.toString() == state.segment) state.segment else "x"
 #             }
 #         }
 #     }
