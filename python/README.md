@@ -91,6 +91,11 @@ pip install enum34
 ```
 [Documentación oficial](https://pypi.org/project/enum/)
 
+# Testing con PyTest
+```
+pip install pytest
+```
+[Más información](https://pypi.org/project/pytest/)
 ## .gitignore
 Hemos configurado el `.gitignore` para que si permita hacer seguimiento de `requirements.txt`:
 ```
