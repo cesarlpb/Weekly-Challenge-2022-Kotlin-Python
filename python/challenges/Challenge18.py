@@ -32,51 +32,73 @@ class TresEnRaya(Enum):
     O = "O",
     EMPTY = ""
 def main():
-    # print(tres_en_raya([
-    #     [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
-    #     [TresEnRaya.O, "$", TresEnRaya.O],
-    #     [TresEnRaya.O, TresEnRaya.O, TresEnRaya.X]
-    #     ]))
-    # print(tres_en_raya([
-    #     [TresEnRaya.X, TresEnRaya.X, TresEnRaya.X],
-    #     [TresEnRaya.O, TresEnRaya.O, TresEnRaya.O],
-    #     [TresEnRaya.O, TresEnRaya.EMPTY, TresEnRaya.X]
-    #     ]))
+    # Se puede ganar en fila y columna a la vez -> prop 5:4
+    # Se puede ganar en una diagonal y fila/col -> prop 5:4
+    # Se puede ganar en ambas diagonales -> prop 5:4
+    # Pueden ganar ambos (2 filas, 2 cols)
+    # Nulo -> prop no vale -> ganadores y es_tablero_valido = False
+    # Empate -> ganadores [] -> es_tablero_valido = True
+    # Ganadores := True, ganadores
+    # Nulo := False, ganadores
+    # Empate := True, []
+
+    print("Gana X en fila y O en fila:")
+    print(tres_en_raya([
+        [TresEnRaya.X, TresEnRaya.X, TresEnRaya.X],
+        [TresEnRaya.O, TresEnRaya.O, TresEnRaya.O],
+        [TresEnRaya.O, TresEnRaya.EMPTY, TresEnRaya.X]
+        ]))
+    print("Gana O en col:")
     print(tres_en_raya([
         [TresEnRaya.X, TresEnRaya.O, TresEnRaya.O],
         [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
         [TresEnRaya.O, TresEnRaya.O, TresEnRaya.X]
         ]))
+    print("Gana O en línea y diagonal secundaria:")
+    print(tres_en_raya([
+        [TresEnRaya.O, TresEnRaya.O, TresEnRaya.O],
+        [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
+        [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X]
+    ]))
+    print("Gana O en col:")
+    print(tres_en_raya([
+        [TresEnRaya.O, TresEnRaya.EMPTY, TresEnRaya.O],
+        [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X],
+        [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X]
+    ]))
+    print("Gana O en fila y col:")
+    print(tres_en_raya([
+        [TresEnRaya.O, TresEnRaya.O, TresEnRaya.O],
+        [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X],
+        [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X]
+    ]))
+    print("Gana X en ambas diagonales:")
+    print(tres_en_raya([
+        [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
+        [TresEnRaya.O, TresEnRaya.X, TresEnRaya.O],
+        [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X]
+    ]))
 
-    # print(tres_en_raya([
-    #     [TresEnRaya.EMPTY, TresEnRaya.O, TresEnRaya.X],
-    #     [TresEnRaya.EMPTY, TresEnRaya.X, TresEnRaya.O],
-    #     [TresEnRaya.EMPTY, TresEnRaya.O, TresEnRaya.X]
-    # ]))
-
-    # print(tres_en_raya([
-    #     [TresEnRaya.O, TresEnRaya.O, TresEnRaya.O],
-    #     [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
-    #     [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X]
-    # ]))
-
-    # print(tres_en_raya([
-    #     [TresEnRaya.O, TresEnRaya.EMPTY, TresEnRaya.O],
-    #     [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X],
-    #     [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X]
-    # ]))
-
-    # print(tres_en_raya([
-    #     [TresEnRaya.O, TresEnRaya.O, TresEnRaya.O],
-    #     [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X],
-    #     [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X]
-    # ]))
-
-    # print(tres_en_raya([
-    #     [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
-    #     [TresEnRaya.X, TresEnRaya.X, TresEnRaya.O],
-    #     [TresEnRaya.X, TresEnRaya.X, TresEnRaya.X]
-    # ]))
+    print("Nulo:")
+    print(tres_en_raya([
+        [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
+        [TresEnRaya.O, "$", TresEnRaya.O],
+        [TresEnRaya.O, TresEnRaya.O, TresEnRaya.X]
+        ]))
+        
+    print("Empate con 3 EMPTY:")
+    print(tres_en_raya([
+        [TresEnRaya.EMPTY, TresEnRaya.O, TresEnRaya.X],
+        [TresEnRaya.EMPTY, TresEnRaya.X, TresEnRaya.O],
+        [TresEnRaya.EMPTY, TresEnRaya.O, TresEnRaya.X]
+    ]))
+    print("Empate con 1 EMPTY:")
+    print(tres_en_raya([
+        [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
+        [TresEnRaya.O, TresEnRaya.EMPTY, TresEnRaya.O],
+        [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X]
+    ]))
+    # rellenar casos con mas EMPTY
 def comprobar_si_hay_char_no_valido(tablero):
     contadores = [0, 0, 0]  # cont_x, cont_o, cont_empty
     chars_validos = [TresEnRaya.X, TresEnRaya.O, TresEnRaya.EMPTY]
@@ -171,18 +193,24 @@ def tres_en_raya(tablero):
     (existe_char_no_valido, contadores) = comprobar_si_hay_char_no_valido(tablero)
     # Proporción incorrecta de X y O
     es_proporcion_correcta = comprobar_si_es_prop_correcta(tablero)
+    
     # Ganadores
-    # ganadores_horizontales = buscar_ganador_horizontal(tablero)
-    # ganadores_verticales = buscar_ganador_vertical(tablero)
-    
+    ganadores_horizontales = buscar_ganador_horizontal(tablero)
+    ganadores_verticales = buscar_ganador_vertical(tablero)    
     ganadores_diagonales = buscar_ganador_diagonal(tablero)
-    print("ganador",ganadores_diagonales)
-
-    return (contadores, not existe_char_no_valido and es_proporcion_correcta)
-    
-    # Hay ganador
-    # Hay empate -> no gana nadie
-    # Si ganan ambos ?
+    # Se puede ganar en fila y columna a la vez -> prop 5:4
+    # Se puede ganar en una diagonal y fila/col -> prop 5:4
+    # Se puede ganar en ambas diagonales -> prop 5:4
+    # Pueden ganar ambos (2 filas, 2 cols)
+    # Nulo -> prop no vale -> ganadores y es_tablero_valido = False
+    # Empate -> ganadores [] -> es_tablero_valido = True
+    ganadores = ganadores_horizontales + ganadores_verticales + ganadores_diagonales
+    ganadores_set = set(ganadores)
+    es_tablero_valido = not existe_char_no_valido and es_proporcion_correcta
+    # Ganadores := True, ganadores
+    # Nulo := False, ganadores
+    # Empate := True, []
+    return (es_tablero_valido, list(ganadores_set))
 
 main()
 # fun main() {

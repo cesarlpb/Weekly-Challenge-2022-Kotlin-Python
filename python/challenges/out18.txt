@@ -1,0 +1,18 @@
+Gana X en fila y O en fila:
+(True, [<TresEnRaya.O: ('O',)>, <TresEnRaya.X: ('X',)>])
+Gana O en col:
+(True, [<TresEnRaya.O: ('O',)>])
+Gana O en línea y diagonal secundaria:
+(True, [<TresEnRaya.O: ('O',)>])
+Gana O en col:
+(True, [<TresEnRaya.O: ('O',)>])
+Gana O en fila y col:
+(True, [<TresEnRaya.O: ('O',)>])
+Gana X en ambas diagonales:
+(True, [<TresEnRaya.X: ('X',)>])
+Nulo:
+(False, [<TresEnRaya.O: ('O',)>])
+Empate con 3 EMPTY:
+(True, [])
+Empate con 1 EMPTY:
+(True, [])
