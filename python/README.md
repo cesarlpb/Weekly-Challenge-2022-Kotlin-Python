@@ -18,6 +18,11 @@ o
 python3 -m venv nombre_del_entorno
 ```
 Más info: [virtualenv](https://learnpython.com/blog/how-to-use-virtualenv-python/)
+
+- Si no funciona bien el entorno virtual o hay problemas a la hora de instalar en el global, intérprete online:
+
+[Online Python](https://www.online-python.com/)
+
 ### Activar venv y desactivar
 - Activamos el entorno virtual antes de instalar
 ```
@@ -87,8 +92,9 @@ pip install datetime
 
 ## Enums
 ```
-pip install enum34
+pip install enum
 ```
+* **Nota: instalar en entorno virtual porque puede dar problemas en global**
 [Documentación oficial](https://pypi.org/project/enum/)
 
 # Testing con PyTest
@@ -96,6 +102,24 @@ pip install enum34
 pip install pytest
 ```
 [Más información](https://pypi.org/project/pytest/)
+## Generación de Reportes con Pytest-html
+```
+pip install pytest-html
+```
+```
+pytest nombre_archivo_test.py --html=nombre_archivo_reporte.html
+```
+
+```
+import pytest
+from py.xml import html
+
+def pytest_html_report_title(report)
+   report.title = "My very own title!"
+```
+- [Respuesta en Stackoverflow](https://stackoverflow.com/questions/29123840/how-to-generate-test-report-using-pytest)
+- [pytest-html](https://pypi.org/project/pytest-html/)
+
 ## .gitignore
 Hemos configurado el `.gitignore` para que si permita hacer seguimiento de `requirements.txt`:
 ```
