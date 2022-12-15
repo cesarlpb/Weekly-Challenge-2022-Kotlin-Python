@@ -1,5 +1,5 @@
 # Challenge 18
-
+from enum import Enum
 # /*
 #  * Reto #18
 #  * TRES EN RAYA
@@ -11,7 +11,8 @@
 #  * - "X" si han ganado las "X"
 #  * - "O" si han ganado los "O"
 #  * - "Empate" si ha habido un empate
-#  * - "Nulo" si la proporción de "X", de "O", o de la matriz no es correcta. O si han ganado los 2.
+#  * - "Nulo" si la proporción de "X", de "O", o de la matriz no es correcta. 
+#  * -- O si han ganado los 2. 
 #  * Nota: La matriz puede no estar totalmente cubierta. Se podría representar con un vacío "", por ejemplo.
 #  *
 #  * Información adicional:
@@ -22,30 +23,87 @@
 #  *
 #  */
 
+#%% Tres en Raya
+# Lista de listas -> array 2D
+tablero = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+print(tablero) # ejemplo
+class TresEnRaya(Enum):
+    X = "X",
+    O = "O",
+    EMPTY = ""
+def main():
+    print(tres_en_raya([
+        [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
+        [TresEnRaya.O, "$", TresEnRaya.O],
+        [TresEnRaya.O, TresEnRaya.O, TresEnRaya.X]
+        ]))
+    print(tres_en_raya([
+        [TresEnRaya.X, TresEnRaya.X, TresEnRaya.X],
+        [TresEnRaya.O, TresEnRaya.O, TresEnRaya.O],
+        [TresEnRaya.O, TresEnRaya.EMPTY, TresEnRaya.X]
+        ]))
+    print(tres_en_raya([
+        [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
+        [TresEnRaya.O, TresEnRaya.X, TresEnRaya.O],
+        [TresEnRaya.O, TresEnRaya.O, TresEnRaya.X]
+        ]))
+
+    print(tres_en_raya([
+        [TresEnRaya.EMPTY, TresEnRaya.O, TresEnRaya.X],
+        [TresEnRaya.EMPTY, TresEnRaya.X, TresEnRaya.O],
+        [TresEnRaya.EMPTY, TresEnRaya.O, TresEnRaya.X]
+    ]))
+
+    print(tres_en_raya([
+        [TresEnRaya.O, TresEnRaya.O, TresEnRaya.O],
+        [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X],
+        [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X]
+    ]))
+
+    print(tres_en_raya([
+        [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
+        [TresEnRaya.X, TresEnRaya.X, TresEnRaya.O],
+        [TresEnRaya.X, TresEnRaya.X, TresEnRaya.X]
+    ]))
+def buscar_ganador_horizontal(tablero):
+    pass
+def buscar_ganador_vertical(tablero):
+    pass
+def buscar_ganador_diagonal(tablero):
+    pass
+def tres_en_raya(tablero):
+    # Si el tablero no es válido
+    
+    # Hay ganador
+    # Hay empate -> no gana nadie
+    # Si ganan ambos ?
+    
+    pass
+main()
 # fun main() {
 
-#     println(checkTicTacToe(arrayOf(
-#         arrayOf(TicTacToeValue.X, TicTacToeValue.O, TicTacToeValue.X),
-#         arrayOf(TicTacToeValue.O, TicTacToeValue.X, TicTacToeValue.O),
-#         arrayOf(TicTacToeValue.O, TicTacToeValue.O, TicTacToeValue.X))))
+#     println(checkTicTacToe([
+#         [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X),
+#         [TresEnRaya.O, TresEnRaya.X, TresEnRaya.O),
+#         [TresEnRaya.O, TresEnRaya.O, TresEnRaya.X))))
 
-#     println(checkTicTacToe(arrayOf(
-#         arrayOf(TicTacToeValue.EMPTY, TicTacToeValue.O, TicTacToeValue.X),
-#         arrayOf(TicTacToeValue.EMPTY, TicTacToeValue.X, TicTacToeValue.O),
-#         arrayOf(TicTacToeValue.EMPTY, TicTacToeValue.O, TicTacToeValue.X))))
+#     println(checkTicTacToe([
+#         [TresEnRaya.EMPTY, TresEnRaya.O, TresEnRaya.X),
+#         [TresEnRaya.EMPTY, TresEnRaya.X, TresEnRaya.O),
+#         [TresEnRaya.EMPTY, TresEnRaya.O, TresEnRaya.X))))
 
-#     println(checkTicTacToe(arrayOf(
-#         arrayOf(TicTacToeValue.O, TicTacToeValue.O, TicTacToeValue.O),
-#         arrayOf(TicTacToeValue.O, TicTacToeValue.X, TicTacToeValue.X),
-#         arrayOf(TicTacToeValue.O, TicTacToeValue.X, TicTacToeValue.X))))
+#     println(checkTicTacToe([
+#         [TresEnRaya.O, TresEnRaya.O, TresEnRaya.O),
+#         [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X),
+#         [TresEnRaya.O, TresEnRaya.X, TresEnRaya.X))))
 
-#     println(checkTicTacToe(arrayOf(
-#         arrayOf(TicTacToeValue.X, TicTacToeValue.O, TicTacToeValue.X),
-#         arrayOf(TicTacToeValue.X, TicTacToeValue.X, TicTacToeValue.O),
-#         arrayOf(TicTacToeValue.X, TicTacToeValue.X, TicTacToeValue.X))))
+#     println(checkTicTacToe([
+#         [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X),
+#         [TresEnRaya.X, TresEnRaya.X, TresEnRaya.O),
+#         [TresEnRaya.X, TresEnRaya.X, TresEnRaya.X))))
 # }
 
-# private enum class TicTacToeValue {
+# private enum class TresEnRaya {
 #     X, O, EMPTY
 # }
 
@@ -53,7 +111,7 @@
 #     X, O, DRAW, NULL
 # }
 
-# private fun checkTicTacToe(board: Array<Array<TicTacToeValue>>): TicTacToeResult {
+# private fun checkTicTacToe(board: Array<Array<TresEnRaya>>): TicTacToeResult {
 
 #     // Null
 
@@ -64,7 +122,7 @@
 #     var xCount = 0
 #     var oCount = 0
 
-#     var flatBoard: Array<TicTacToeValue> = emptyArray()
+#     var flatBoard: Array<TresEnRaya> = emptyArray()
 #     for (row in board) {
 #         flatBoard += row
 
@@ -73,9 +131,9 @@
 #         }
 
 #         for (col in row) {
-#             if (col == TicTacToeValue.X) {
+#             if (col == TresEnRaya.X) {
 #                 xCount += 1
-#             } else if (col == TicTacToeValue.O) {
+#             } else if (col == TresEnRaya.O) {
 #                 oCount += 1
 #             }
 #         }
@@ -87,26 +145,26 @@
 
 #     // Win or Draw
 
-#     val winCombinations = arrayOf(
-#         arrayOf(0, 1, 2), arrayOf(3, 4, 5), arrayOf(6, 7, 8), arrayOf(0, 3, 6),
-#         arrayOf(1, 4, 7), arrayOf(2, 5, 8), arrayOf(0, 4, 8), arrayOf(2, 4, 6))
+#     val winCombinations = [
+#         [0, 1, 2), [3, 4, 5), [6, 7, 8), [0, 3, 6),
+#         [1, 4, 7), [2, 5, 8), [0, 4, 8), [2, 4, 6))
 
 #     var result = TicTacToeResult.DRAW
 
 #     for (winCombination in winCombinations) {
 
-#         if (flatBoard[winCombination[0]] != TicTacToeValue.EMPTY
+#         if (flatBoard[winCombination[0]] != TresEnRaya.EMPTY
 #                 && flatBoard[winCombination[0]] == flatBoard[winCombination[1]]
 #                 && flatBoard[winCombination[0]] == flatBoard[winCombination[2]]) {
 
 #             val winner = flatBoard[winCombination[0]]
 
 #             if (result != TicTacToeResult.DRAW
-#                     && (if (result == TicTacToeResult.O) TicTacToeValue.O else TicTacToeValue.X) != winner) {
+#                     && (if (result == TicTacToeResult.O) TresEnRaya.O else TresEnRaya.X) != winner) {
 #                 return TicTacToeResult.NULL
 #             }
 
-#             result = if (winner == TicTacToeValue.X) TicTacToeResult.X else TicTacToeResult.O
+#             result = if (winner == TresEnRaya.X) TicTacToeResult.X else TicTacToeResult.O
 #         }
 #     }
 
