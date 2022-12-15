@@ -48,7 +48,7 @@ def main():
     print(verificar_carrera([Acciones.RUN, Acciones.JUMP, Acciones.RUN, Acciones.JUMP, Acciones.RUN], "_|_|_"))
     print(verificar_carrera([Acciones.RUN, Acciones.RUN, Acciones.RUN, Acciones.JUMP, Acciones.RUN], "_|_|_"))
     print(verificar_carrera([Acciones.RUN, Acciones.RUN, Acciones.JUMP, Acciones.JUMP, Acciones.RUN], "_|_|_"))
-    print(verificar_carrera([Acciones.RUN, Acciones.RUN, Acciones.JUMP, Acciones.JUMP, Acciones.RUN], "_|_|_|_"))
+    print(verificar_carrera([Acciones.JUMP, Acciones.RUN, Acciones.JUMP, Acciones.JUMP, Acciones.RUN], "_|_|_|_"))
     print(verificar_carrera([Acciones.RUN, Acciones.JUMP, Acciones.RUN, Acciones.JUMP], "_|_|_"))
     print(verificar_carrera([Acciones.RUN, Acciones.JUMP, Acciones.RUN, Acciones.JUMP, Acciones.RUN, Acciones.JUMP, Acciones.RUN], "_|_|_"))
     print(verificar_carrera([Acciones.JUMP, Acciones.JUMP, Acciones.JUMP, Acciones.JUMP, Acciones.JUMP], "|||||"))
@@ -59,42 +59,20 @@ def verificar_carrera(acciones, carrera):
     # Verificamos que los chars de carrera sean "_" y "|"
     for elemento in carrera:
         if elemento not in (Acciones.JUMP.value[0], Acciones.RUN.value[0]):
-            return False
+            return (carrera, "", False)
     # Iteramos en acciones y carrera para comprobar si el atleta realiza las acciones correctas:
     carrera_mod = ""
     for accion, elemento in zip(acciones, carrera):
         if accion.value[0] != elemento:
             if accion == Acciones.RUN and elemento == "|":
-                pass
+                carrera_mod += "/"
+                return (carrera, carrera_mod, False)
             elif accion == Acciones.JUMP and elemento == "_":
-                pass
-            return False
-    return (carrera_mod, len(acciones) == len(carrera))
+                carrera_mod += "x"
+                return (carrera, carrera_mod, False)
+        else:
+            carrera_mod += elemento
+    
+    return (carrera, carrera_mod, len(acciones) == len(carrera))
 
 main()
-# private fun checkRace(athlete: List<Acciones>, track: String) : Boolean {
-
-#     val totalActions = if (athlete.count() > track.count())  athlete.count() else track.count()
-#     val minActions = if (athlete.count() > track.count()) track.count() else athlete.count()
-
-#     val trackSegments = track.toList()
-
-#     var athleteTrack = ""
-
-#     for (index in (0 until totalActions)) {
-#         athleteTrack += if (index >= minActions) {
-#             "?"
-#         } else {
-#             val segment = trackSegments[index]
-#             when(val state = athlete[index]) {
-#                 Acciones.RUN -> if (segment.toString() == state.segment) state.segment else "/"
-#                 Acciones.JUMP -> if (segment.toString() == state.segment) state.segment else "x"
-#             }
-#         }
-#     }
-
-#     println(athleteTrack)
-
-#     return track == athleteTrack
-# }
-
