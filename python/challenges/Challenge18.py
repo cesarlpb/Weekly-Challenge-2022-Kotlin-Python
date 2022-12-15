@@ -43,8 +43,8 @@ def main():
     #     [TresEnRaya.O, TresEnRaya.EMPTY, TresEnRaya.X]
     #     ]))
     print(tres_en_raya([
+        [TresEnRaya.X, TresEnRaya.O, TresEnRaya.O],
         [TresEnRaya.X, TresEnRaya.O, TresEnRaya.X],
-        [TresEnRaya.O, TresEnRaya.X, TresEnRaya.O],
         [TresEnRaya.O, TresEnRaya.O, TresEnRaya.X]
         ]))
 
@@ -137,6 +137,21 @@ def buscar_ganador_vertical(tablero):
                     ganadores.append(TresEnRaya.O)
 
     return ganadores
+def buscar_ganador_linea(linea):
+    cont_x, cont_o = 0, 0
+    for dato in linea:
+        if dato == TresEnRaya.EMPTY:
+            return []
+        elif dato == TresEnRaya.X:
+            cont_x += 1
+            if cont_x == 3:
+                return [TresEnRaya.X]
+        else:
+            cont_o += 1
+            if cont_o == 3:
+                return [TresEnRaya.O]
+    return []
+
 def buscar_ganador_diagonal(tablero):
     # [1]   2   (3) --> 1 [0][0] --> (3) [0][2]
     #  4  ([5])  6  --> 5 [1][1] 
@@ -144,24 +159,13 @@ def buscar_ganador_diagonal(tablero):
     diagonal_principal = []
     diagonal_secundaria = []
     n = len(tablero[0])
-    ganadores = []
     for i in range(n):
         diagonal_principal.append(tablero[i][i])
         diagonal_secundaria.append(tablero[i][n-1-i])
-    # Añadir diagonal secundaria
-    for dato in diagonal_principal:
-        cont_x, cont_o = 0, 0
-        if dato == TresEnRaya.EMPTY:
-            continue
-        elif dato == TresEnRaya.X:
-            cont_x += 1
-            if cont_x == 3:
-                ganadores.append(TresEnRaya.X)
-        else:
-            cont_o += 1
-            if cont_o == 3:
-                ganadores.append(TresEnRaya.O)
-    return ganadores
+    # Pasamos bucle a una fn auxiliar
+    ganador_diagonal_principal = buscar_ganador_linea(diagonal_principal)
+    ganador_diagonal_secundaria = buscar_ganador_linea(diagonal_secundaria)
+    return ganador_diagonal_principal + ganador_diagonal_secundaria
 def tres_en_raya(tablero):
     # True el tablero no es válido - es decir, tiene chars != X, O, ""
     (existe_char_no_valido, contadores) = comprobar_si_hay_char_no_valido(tablero)
@@ -172,7 +176,7 @@ def tres_en_raya(tablero):
     # ganadores_verticales = buscar_ganador_vertical(tablero)
     
     ganadores_diagonales = buscar_ganador_diagonal(tablero)
-    print(ganadores_diagonales)
+    print("ganador",ganadores_diagonales)
 
     return (contadores, not existe_char_no_valido and es_proporcion_correcta)
     
