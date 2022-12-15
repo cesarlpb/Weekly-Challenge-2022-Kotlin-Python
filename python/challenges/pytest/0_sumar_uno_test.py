@@ -23,13 +23,22 @@ def test_sumar_uno():
 
 # Ejemplo 2 - fun que suma 1 a un número -> try / except
 def sumar_uno_v2(x):
-    if isinstance(x, int):
-        return int(x + 1)
-    else: 
-        raise TypeError("El número debe ser un entero")
+    try:
+        resultado = int(x + 1)
+    except TypeError:
+        print("Hubo error de tipo")
+        return None
+    else:
+        print("No hubo error")
+        return resultado
+    finally:
+        print("Fin de la función")
+    
 
 def test_sumar_uno_v2():
-    pass
+    assert sumar_uno_v2(3) == 4, "El resultado debe ser 3+1 = 4"
+    assert sumar_uno_v2(-1) == 0, "El resultado debe ser -1+1 = 0"
+    assert sumar_uno_v2('hola') == None, "El resultado debe ser None"
 
 def main():
     sumar_uno(1)
