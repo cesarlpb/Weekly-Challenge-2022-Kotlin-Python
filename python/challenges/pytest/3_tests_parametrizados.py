@@ -58,6 +58,22 @@ def test_es_palindromo_debe_devolver_false_con_lista_1():
 def test_es_palindromo_debe_devolver_false_parametrizado(palindromo):
     assert not es_palindromo(palindromo)
 
+# Parametrizamos ambos casos -> True y False
+
+@pytest.mark.parametrize("posible_palindromo, resultado_esperado", [
+    ("", True),
+    ("a", True),
+    ("Bob", True),
+    ("Never odd or even", True),
+    ("Do geese see God?", True),
+    ("abc", False),
+    ("abab", False),
+    ("palindrome", False),
+    ("nope", False),
+    ("asadadadadad", False),
+])
+def test_es_palindromo_debe_devolver_true_o_false(posible_palindromo, resultado_esperado):
+    assert es_palindromo(posible_palindromo) == resultado_esperado
 
 def main():
     print(es_palindromo("Ana lleva al oso la avellana."))
