@@ -7,7 +7,7 @@ def division_por_cero(x, y):
         # Ni que y != 0
     return x / y
 
-def test_division_por_cero():
+def test_division_por_cero_debe_devolver_zero_division_error():
     with pytest.raises(ZeroDivisionError):
         division_por_cero(1, 0)
     with pytest.raises(ZeroDivisionError):
@@ -21,10 +21,12 @@ def division_por_cero_v2(x, y):
     elif y == 0:
         raise ZeroDivisionError("No se puede dividir entre 0")
     return x / y # en general es float
-def test_division_por_cero_v2():
+def test_division_por_cero_v2_debe_devolver_float():
     assert division_por_cero_v2(1, 1) == 1
     assert division_por_cero_v2(5, 2) == 5/2
     assert division_por_cero_v2(1, 3) == 1/3
+    assert isinstance(division_por_cero_v2(1, 3), float)
+def test_division_por_cero_v2_debe_arrojar_error():
     with pytest.raises(TypeError):
         division_por_cero_v2("1", 3)
     with pytest.raises(TypeError):
@@ -43,10 +45,12 @@ def division_por_cero_v3(x, y):
         print("Ha ocurrido este error:", e)
     except ZeroDivisionError as e:
         print("Ha ocurrido este error:", e)
-def test_division_por_cero_v3():
+def test_division_por_cero_v3_debe_devolver_float():
     assert division_por_cero_v3(1, 1) == 1
     assert division_por_cero_v3(5, 2) == 5/2
     assert division_por_cero_v3(1, 3) == 1/3
+    assert isinstance(division_por_cero_v3(1, 3), float)
+def test_division_por_cero_v3_debe_devolver_none():
     assert division_por_cero_v3("1", 3) == None
     assert division_por_cero_v3(1, "3") == None
     assert division_por_cero_v3(1, 0) == None
