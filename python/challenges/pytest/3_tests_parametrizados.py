@@ -29,6 +29,16 @@ def test_es_palindromo_debe_devolver_true_con_lista_1():
     lista_de_inputs_que_devuelve_true = ["Ana lleva al oso la avellana.", "Adivina ya te opina, ya ni miles origina, ya ni cetro me domina, ya ni monarcas, a repaso ni mulato carreta, acaso nicotina, ya ni cita vecino, anima cocina, pedazo gallina, cedazo terso nos retoza de canilla goza, de pánico camina, ónice vaticina, ya ni tocino saca, a terracota luminosa pera, sacra nómina y ánimo de mortecina, ya ni giros elimina, ya ni poeta, ya ni vida.", "Ana"]
     for i in range(len(lista_de_inputs_que_devuelve_true)):
         assert es_palindromo(lista_de_inputs_que_devuelve_true[i]) == True
+# Tests parametrizado
+@pytest.mark.parametrize("palindromo", [
+    "Ana lleva al oso la avellana.",
+    "Adivina ya te opina, ya ni miles origina, ya ni cetro me domina, ya ni monarcas, a repaso ni mulato carreta, acaso nicotina, ya ni cita vecino, anima cocina, pedazo gallina, cedazo terso nos retoza de canilla goza, de pánico camina, ónice vaticina, ya ni tocino saca, a terracota luminosa pera, sacra nómina y ánimo de mortecina, ya ni giros elimina, ya ni poeta, ya ni vida.",
+    "Ana",
+    "101"
+])
+def test_es_palindromo_debe_devolver_true_parametrizado(palindromo):
+    assert es_palindromo(palindromo)
+    
 # Casos que devuelven False
 def test_es_palindromo_debe_devolver_false_1():
     assert es_palindromo("¿Qué os ha parecido el reto?") == False
@@ -38,18 +48,17 @@ def test_es_palindromo_debe_devolver_false_con_lista_1():
     lista_de_inputs_que_devuelve_false = ["¿Qué os ha parecido el reto?", "asdf", "102", "asdf102", "102asdf"]
     for i in range(len(lista_de_inputs_que_devuelve_false)):
         assert es_palindromo(lista_de_inputs_que_devuelve_false[i]) == False
-def test_es_palindromo_debe_devolver_true():
-    pass
-def test_es_palindromo_debe_devolver_false():
-    pass
+# Tests parametrizados
+@pytest.mark.parametrize("palindromo", [
+    "¿Qué os ha parecido el reto?",
+    "asdf",
+    "102",
+    "asdf102",
+])
+def test_es_palindromo_debe_devolver_false_parametrizado(palindromo):
+    assert not es_palindromo(palindromo)
 
-# pytest.mark.parametrize("palindrome", [
-#     "",
-#     "a",
-#     "Bob",
-#     "Never odd or even",
-#     "Do geese see God?",
-# ])
+
 def main():
     print(es_palindromo("Ana lleva al oso la avellana."))
     print(es_palindromo("Adivina ya te opina, ya ni miles origina, ya ni cetro me domina, ya ni monarcas, a repaso ni mulato carreta, acaso nicotina, ya ni cita vecino, anima cocina, pedazo gallina, cedazo terso nos retoza de canilla goza, de pánico camina, ónice vaticina, ya ni tocino saca, a terracota luminosa pera, sacra nómina y ánimo de mortecina, ya ni giros elimina, ya ni poeta, ya ni vida."))
