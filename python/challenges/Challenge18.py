@@ -140,6 +140,7 @@ def buscar_ganador_horizontal(tablero):
                 if cont_o == 3:
                     ganadores.append(TresEnRaya.O)
     return ganadores
+
 def buscar_ganador_vertical(tablero):
     ganadores = []
     
@@ -159,6 +160,7 @@ def buscar_ganador_vertical(tablero):
                     ganadores.append(TresEnRaya.O)
 
     return ganadores
+
 def buscar_ganador_linea(linea):
     cont_x, cont_o = 0, 0
     for dato in linea:
@@ -188,6 +190,7 @@ def buscar_ganador_diagonal(tablero):
     ganador_diagonal_principal = buscar_ganador_linea(diagonal_principal)
     ganador_diagonal_secundaria = buscar_ganador_linea(diagonal_secundaria)
     return ganador_diagonal_principal + ganador_diagonal_secundaria
+
 def tres_en_raya(tablero):
     # True el tablero no es válido - es decir, tiene chars != X, O, ""
     (existe_char_no_valido, contadores) = comprobar_si_hay_char_no_valido(tablero)
