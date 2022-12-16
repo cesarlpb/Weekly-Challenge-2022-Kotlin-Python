@@ -15,22 +15,39 @@ def test_tres_en_raya_ganador_en_fila_debe_devolver_x():
         ]
     assert c.tres_en_raya(tablero) == (True, [c.TresEnRaya.X])
 def test_tres_en_raya_ganador_en_fila_debe_devolver_o():
-    pass
+    tablero = [
+            [c.TresEnRaya.O, c.TresEnRaya.O, c.TresEnRaya.O],
+            [c.TresEnRaya.X, c.TresEnRaya.X, c.TresEnRaya.X],
+            [c.TresEnRaya.X, c.TresEnRaya.EMPTY, c.TresEnRaya.X]
+        ]
+    assert c.tres_en_raya(tablero) == (True, [c.TresEnRaya.O])
 def test_tres_en_raya_ganador_en_fila_debe_devolver_x_o():
-    pass
-    # print("Gana X en fila y O en fila:")
+    tablero = [
+            [c.TresEnRaya.O, c.TresEnRaya.O, c.TresEnRaya.O],
+            [c.TresEnRaya.X, c.TresEnRaya.X, c.TresEnRaya.X],
+            [c.TresEnRaya.X, c.TresEnRaya.EMPTY, c.TresEnRaya.O]
+        ]
+    assert c.tres_en_raya(tablero)[0] == (True)
+    assert len(c.tres_en_raya(tablero)[1]) == 2 # Hay 2 ganadores
 def test_tres_en_raya_ganador_en_col_debe_devolver_o():
-    pass
+    tablero = [
+            [c.TresEnRaya.X, c.TresEnRaya.O, c.TresEnRaya.O],
+            [c.TresEnRaya.X, c.TresEnRaya.O, c.TresEnRaya.X],
+            [c.TresEnRaya.O, c.TresEnRaya.O, c.TresEnRaya.X]
+        ]
+    assert c.tres_en_raya(tablero) == (True, [c.TresEnRaya.O])
 def test_tres_en_raya_ganador_en_diagonal_principal_debe_devolver_o():
-    pass
+    tablero = [ 
+            [c.TresEnRaya.O, c.TresEnRaya.O, c.TresEnRaya.X],
+            [c.TresEnRaya.X, c.TresEnRaya.O, c.TresEnRaya.X],
+            [c.TresEnRaya.O, c.TresEnRaya.X, c.TresEnRaya.O]
+        ]
+    assert c.tres_en_raya(tablero) == (True, [c.TresEnRaya.O])
     # print("Gana X en col y O en col:")
 # [[c.TresEnRaya.X, c.TresEnRaya.X, c.TresEnRaya.X],
 # [c.TresEnRaya.O, c.TresEnRaya.O, c.TresEnRaya.O],
 # [c.TresEnRaya.O, c.TresEnRaya.EMPTY, c.TresEnRaya.X]]
-#     # print("Gana O en col:")
-# [[c.TresEnRaya.X, c.TresEnRaya.O, c.TresEnRaya.O],
-# [c.TresEnRaya.X, c.TresEnRaya.O, c.TresEnRaya.X],
-# [c.TresEnRaya.O, c.TresEnRaya.O, c.TresEnRaya.X]]
+
 #     # print("Gana O en línea y diagonal secundaria:")
 # [[c.TresEnRaya.O, c.TresEnRaya.O, c.TresEnRaya.O],
 # [c.TresEnRaya.X, c.TresEnRaya.O, c.TresEnRaya.X],
