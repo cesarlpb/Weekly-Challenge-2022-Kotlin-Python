@@ -101,6 +101,33 @@ pip install enum
 ```
 pip install pytest
 ```
+## Ejecución de tests
+- Ejecución de tests de un archivo:
+```
+pytest nombre_archivo_test.py
+```
+- Formato de salida más detallado:
+```
+pytest -v nombre_archivo_test.py
+```
+```
+pytest -v -s nombre_archivo_test.py
+```
+- Formato de salida más resumido:
+```
+pytest -q nombre_archivo_test.py
+```
+### Más formas de ejecutar tests
+- Ejecución de tests que contienen substring (en nombre):
+```
+pytest nombre_de_archivo -k substring
+```
+- Añadiendo `-v` o `-q` para más o menos detalle: 
+```
+pytest nombre_de_archivo -k substring -v
+```
+[Ejemplos más personalizados de ejecución de tests](https://programmerclick.com/article/1422390515/)
+[Ejemplos oficiales](https://docs.pytest.org/en/7.1.x/getting-started.html)
 [Más información](https://pypi.org/project/pytest/)
 ## Generación de Reportes con Pytest-html
 ```
